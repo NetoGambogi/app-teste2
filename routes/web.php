@@ -12,9 +12,9 @@ Route::get('ordens', function () {
     return view('ordens');
 });
 
-Route::get('clientes', [ClienteController::class, 'index'])->name('clientes.index');
-Route::get('clientes/{client}', [ClienteController::class, 'show'])->name('clientes.show');
-Route::post('clientes', [ClienteController::class, 'store'])->name('clientes.store');
+Route::get('clientes', [ClienteController::class, 'index'])->name('clientes.index'); // Lista de clientes
+Route::get('clientes/{client}', [ClienteController::class, 'show'])->name('clientes.show'); // Detalhe dos clientes
+Route::post('clientes', [ClienteController::class, 'store'])->name('clientes.store'); // Criar novo cliente
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
