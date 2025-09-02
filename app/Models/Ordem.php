@@ -12,7 +12,7 @@ class Ordem extends Model
     protected $table = 'ordems'; 
 
     protected $fillable = [
-        'titulo', 'descricao', 'status', 'user_id', 'cliente_id'
+        'titulo', 'descricao', 'status', 'cliente_id'
     ];
 
     public function cliente()

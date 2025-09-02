@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Client;
+use App\Models\Cliente;
 use Illuminate\Http\Request;
 
 class ClienteController extends Controller
@@ -10,31 +10,32 @@ class ClienteController extends Controller
 
     public function index(Request $request) // Listar os clientes por nome
     {
-        $query = Client::query();
+        $query = Cliente::query();
 
         if ($request->has('nome')) {
             $query->where('nome', 'ilike', "%{$request->nome}%");
         }
 
-        $clients = $query->paginate(10);
-        return response()->json($clients);
+        $clients = $query->paginate(20);
+        return view('clientes', compact ('clients'));
     }
 
-    public function store(Request $request) // Salvar um novo cliente
+    public function store(Request $request) // Salvar um novo cliente (TODO: Não está enviando para o banco de dados)
     {
         $validar = $request->validate([
             'nome' => 'required|min:3',
-            'email' => 'email|unique:clients,email',
+            'email' => 'email|unique:clientes,email',
             'telefone' => 'nullable'
         ]);
 
-        $client = Client::create($validar);
-        return response()->json($client, 201);
+        $client = Cliente::create($validar);
+        return redirect()->route('clientes.index')
+            ->with('sucesso', 'Cliente criado com sucesso.');
     }
 
-    public function show(Client $client) // Mostrar um cliente específico
+    public function show(Cliente $client) // Mostrar um cliente específico
     {
-        return response()->json($client);
+        return view('cliente-detalhe', compact ('client'));
     }
 
     public function update(Request $request, Client $client) // Atualizar um cliente já salvo
@@ -46,12 +47,14 @@ class ClienteController extends Controller
         ]);
 
         $client->update($validar);
-        return response()->json($client);
+        return redirect()->route('clientes')
+                         ->with('success', 'Cliente atualizado com sucesso!');
     }
 
     public function destroy(Client $client) // Apagar um cliente
     {
         $client->delete();
-        return response()->json(null, 204);
+        return redirect()->route('clientes')
+        ->with('sucesso', 'cliente apagado com suceeso.');
     }
 }

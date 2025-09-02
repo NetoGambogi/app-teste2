@@ -22,8 +22,8 @@ class OrdemController extends Controller
             });
         }
 
-        $ordens = $query->paginate(10);
-        return response()->json($ordens);
+        $ordem = $query->paginate(10);
+        return response()->json($ordem);
     }
 
     public function store(Request $request) // Cria uma nova ordem
