@@ -23,12 +23,12 @@ class OrdemController extends Controller
         }
 
         $ordens = $query->paginate(10);
-        return view('clients.index', compact('clients'));
+        return response()->json($ordens);
     }
 
     public function store(Request $request) // Cria uma nova ordem
     {
-        $validar = $request->validar([
+        $validar = $request->validate([
             'titulo' => 'required|min:3',
             'descricao' => 'nullable',
             'status' => 'in:aberta,em_andamento,concluida',
@@ -52,7 +52,7 @@ class OrdemController extends Controller
             return response()->json(['error' => 'Somente admins podem editar.'], 403);
         }
 
-        $validar = $request->validar ([
+        $validar = $request->validate ([
             'titulo' => 'required|min:3',
             'descricao' => 'nullable',
             'status' => 'in:aberta,em_andamento,concluida',

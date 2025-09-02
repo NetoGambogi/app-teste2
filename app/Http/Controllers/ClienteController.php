@@ -17,12 +17,12 @@ class ClienteController extends Controller
         }
 
         $clients = $query->paginate(10);
-        return view('clients.index', compact('clients'));
+        return response()->json($clients);
     }
 
     public function store(Request $request) // Salvar um novo cliente
     {
-        $validar = $request->validar([
+        $validar = $request->validate([
             'nome' => 'required|min:3',
             'email' => 'email|unique:clients,email',
             'telefone' => 'nullable'
@@ -39,7 +39,7 @@ class ClienteController extends Controller
 
     public function update(Request $request, Client $client) // Atualizar um cliente já salvo
     {
-        $validar = $request->validar([
+        $validar = $request->validate([
             'nome' => 'required|min:3',
             'email' => 'email|unique:clients,email,'.$client->id,
             'telefone' => 'nullable'
