@@ -2,31 +2,31 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Order;
+use App\Models\Ordem;
+use App\Models\Cliente;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class OrdemController extends Controller
 {
- public function index(Request $request) // Lista as ordens
+
+    public function index(Request $request)     // Lista ordens
     {
-        $query = Ordem::with('cliente', 'user');
+        $clientes = Cliente::all();
+        $ordens = Ordem::with('cliente', 'user')->paginate(10);
 
-        if ($request->has('status')) {
-            $query->where('status', $request->status);
-        }
-
-        if ($request->has('cliente_nome')) {
-            $query->whereHas('cliente', function ($q) use ($request) {
-                $q->where('nome', 'ilike', "%{$request->cliente_nome}%");
-            });
-        }
-
-        $ordem = $query->paginate(10);
-        return response()->json($ordem);
+        return view('ordens', compact('clientes', 'ordens'));
     }
 
-    public function store(Request $request) // Cria uma nova ordem
+
+    public function create()     // Exibe formulário de criação
+    {
+        $clientes = Cliente::all();
+        return view('ordens.create', compact('clientes'));
+    }
+
+
+    public function store(Request $request)     // Salva nova ordem
     {
         $validar = $request->validate([
             'titulo' => 'required|min:3',
@@ -35,24 +35,30 @@ class OrdemController extends Controller
             'cliente_id' => 'required|exists:clientes,id',
         ]);
 
-        $validar ['user_id'] = Auth::id() ?? 1; // temporário
+        $validar['user_id'] = Auth::id() ?? 1; // temporário
 
-        $ordem = Ordem::create($validar);
-        return response()->json($ordem, 201);
+        Ordem::create($validar);
+
+        return redirect()->route('ordens.index')->with('success', 'Ordem criada com sucesso!');
     }
 
-    public function show(Ordem $ordem) // Mostra os detalhes de uma ordem
+ 
+    public function show(Ordem $ordem)    // Mostra detalhes de uma ordem
     {
-        return response()->json($ordem->load('cliente', 'user'));
+        return view('ordens.show', compact('ordem'));
     }
 
-    public function update(Request $request, Ordem $ordem) // Atualiza uma ordem
-    {
-        if (!Auth::user() || !Auth::user()->is_admin) {
-            return response()->json(['error' => 'Somente admins podem editar.'], 403);
-        }
 
-        $validar = $request->validate ([
+    public function edit(Ordem $ordem)     // Exibe formulário de edição
+    {
+        $clientes = Cliente::all();
+        return view('ordens.edit', compact('ordem', 'clientes'));
+    }
+
+ 
+    public function update(Request $request, Ordem $ordem)    // Atualiza ordem existente
+    {
+        $validar = $request->validate([
             'titulo' => 'required|min:3',
             'descricao' => 'nullable',
             'status' => 'in:aberta,em_andamento,concluida',
@@ -60,17 +66,16 @@ class OrdemController extends Controller
         ]);
 
         $ordem->update($validar);
-        return response()->json($ordem);
+
+        return redirect()->route('ordens.index')->with('success', 'Ordem atualizada com sucesso!');
     }
 
-    public function destroy(Ordem $ordem) // Apaga uma ordem
+   
+    public function destroy(Ordem $ordem)  // Exclui ordem
     {
-        if (!Auth::user() || !Auth::user()->is_admin) {
-            return response()->json(['error' => 'Somente admins podem deletar.'], 403);
-        }
-
         $ordem->delete();
-        return response()->json(null, 204);
+
+        return redirect()->route('ordens.index')->with('success', 'Ordem excluída com sucesso!');
     }
 }
 

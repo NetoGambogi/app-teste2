@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('titulo');
             $table->text('descricao')->nullable();
             $table->enum('status', ['aberta', 'em_andamento', 'concluida'])->default('aberta');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('cliente_id')->constrained()->onDelete('cascade');
             $table->timestamps();
 });
