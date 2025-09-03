@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cliente;
+use App\Models\Ordem;
 use Illuminate\Http\Request;
 
 class ClienteController extends Controller
@@ -20,7 +21,7 @@ class ClienteController extends Controller
         return view('clientes', compact ('clients'));
     }
 
-    public function store(Request $request) // Salvar um novo cliente (TODO: Não está enviando para o banco de dados)
+    public function store(Request $request) // Salvar um novo cliente
     {
         $validar = $request->validate([
             'nome' => 'required|min:3',
@@ -35,19 +36,26 @@ class ClienteController extends Controller
 
     public function show(Cliente $client) // Mostrar um cliente específico
     {
-        return view('cliente-detalhe', compact ('client'));
+        $ordem = Ordem::where('cliente_id', $client->id)->latest()->first();
+        return view('cliente-detalhe', compact ('client', 'ordem'));
     }
 
-    public function update(Request $request, Client $client) // Atualizar um cliente já salvo
+    public function edit(Cliente $client) 
     {
+        return view('clientes-edit', compact ('client'));
+    }
+
+    public function update(Request $request, Cliente $client) // Atualizar um cliente já salvo
+    {
+
         $validar = $request->validate([
             'nome' => 'required|min:3',
-            'email' => 'email|unique:clients,email,'.$client->id,
+            'email' => 'email|unique:clientes,email,'.$client->id,
             'telefone' => 'nullable'
         ]);
 
         $client->update($validar);
-        return redirect()->route('clientes')
+        return redirect()->route('clientes.index')
                          ->with('success', 'Cliente atualizado com sucesso!');
     }
 

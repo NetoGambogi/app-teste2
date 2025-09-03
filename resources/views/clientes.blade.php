@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -51,6 +51,8 @@
     <input type="text" name="telefone" value="{{ old('telefone') }}" required><br><br>
 
     <button type=submit>Cadastrar</button>
+
+    <a href="{{ url('/ordens/') }}">Ver / Cadastrar ordens</a>
 </form>
 </body>
 </html>

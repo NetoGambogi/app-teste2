@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Ordens</title>
 </head>
 <body>
         <h1>Ordens de Serviço</h1>
@@ -14,17 +14,17 @@
 
         <div>
             <label for="titulo">Título</label>
-            <input type="text" required minlength="3">
+            <input type="text" name="titulo" value="{{ old('titulo') }}" required><br><br>
         </div>
 
         <div>
             <label for="descricao">Descrição</label>
-            <textarea id="descricao"></textarea>
+            <input type="text" name="descricao" value="{{ old('descricao') }}" required><br><br>
         </div>
 
         <div>
             <label>Status</label>
-            <select>
+            <select name="status" required>
                 <option value="aberta">Aberta</option>
                 <option value="em_andamento">Em Andamento</option>
                 <option value="concluida">Concluída</option>
@@ -62,11 +62,13 @@
                     <td>{{ $ordem->cliente->nome }}</td>
                     <td>{{ ucfirst($ordem->status) }}</td>
                     <td>{{ $ordem->created_at->format('d/m/Y H:i') }}</td>
+                    <td><a href="{{ route('ordem.show', $ordem->id) }}">Ver</a></td>
                 </tr>
             @endforeach
         </tbody>
     </table>
 
+    <a href="{{ url('/clientes/') }}">Ver os clientes</a>
     {{ $ordens->links() }}
 
 </body>

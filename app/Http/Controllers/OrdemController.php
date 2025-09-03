@@ -13,7 +13,7 @@ class OrdemController extends Controller
     public function index(Request $request)     // Lista ordens
     {
         $clientes = Cliente::all();
-        $ordens = Ordem::with('cliente', 'user')->paginate(10);
+        $ordens = Ordem::with('cliente', 'user')->paginate(15);
 
         return view('ordens', compact('clientes', 'ordens'));
     }
@@ -45,14 +45,15 @@ class OrdemController extends Controller
  
     public function show(Ordem $ordem)    // Mostra detalhes de uma ordem
     {
-        return view('ordens.show', compact('ordem'));
+        $clientes = $ordem->cliente_id;
+        return view('ordem-detalhe', compact('clientes', 'ordem'));
     }
 
 
     public function edit(Ordem $ordem)     // Exibe formulário de edição
     {
-        $clientes = Cliente::all();
-        return view('ordens.edit', compact('ordem', 'clientes'));
+        $clientes = \App\Models\Cliente::all();
+        return view('ordem-edit', compact('ordem', 'clientes'));
     }
 
  
