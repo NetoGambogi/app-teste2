@@ -59,10 +59,10 @@ class ClienteController extends Controller
                          ->with('success', 'Cliente atualizado com sucesso!');
     }
 
-    public function destroy(Client $client) // Apagar um cliente
+    public function destroy(Cliente $client) // Apagar um cliente
     {
         $client->delete();
-        return redirect()->route('clientes')
+        return redirect()->route('clientes.index')
         ->with('sucesso', 'cliente apagado com suceeso.');
     }
 }

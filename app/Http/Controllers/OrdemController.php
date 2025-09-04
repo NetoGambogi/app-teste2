@@ -76,7 +76,8 @@ class OrdemController extends Controller
     {
         $ordem->delete();
 
-        return redirect()->route('ordens.index')->with('success', 'Ordem excluída com sucesso!');
+        return redirect()->route('ordens.index')
+        ->with('success', 'Ordem excluída com sucesso!');
     }
 }
 

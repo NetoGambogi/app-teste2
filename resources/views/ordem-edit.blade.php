@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atualizar ordem</title>
-</head>
-<body>
+@extends('layouts.admin')
+
+@section('content')
 
     <h1>Editar ordem</h1>
     <form action="{{route('ordem.update', $ordem->id )}}" method="POST">
@@ -38,5 +33,6 @@
 
     </form>
 
-</body>
-</html>
+    <a href="{{ url('/ordens/') }}" class="btn btn-secondary">Voltar</a>
+
+@endsection

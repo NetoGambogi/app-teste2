@@ -1,32 +1,21 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de clientes</title>
-</head>
-<body>
+@extends('layouts.admin')
 
-<h1> Lista de clientes </h1>
+@section('content')
 
-    <ul>
+<h1 class="text-center"> Lista de clientes </h1>
+
+<div class="d-flex justify-content-center">
+    <ul class="list-group w-50">
         @foreach ($clients as $client)
-            <li>
+            <li class="list-group-item d-flex justify-content-between">
                 {{$client->nome}} - {{$client->email}}
-                <a href="{{ route('clientes.show', $client->id) }}">Ver</a>
-
-        @can ('delete-client')
-            <form action="{{ url('/client/' . $client->id) }}" method="POST" style="display:inline;">
-                @csrf
-                @method('DELETE')
-                <button type="submit">Deletar</button>
-        </form>
-        @endcan
+                <a href="{{ route('clientes.show', $client->id) }}" class="btn btn-primary">Ver</a>
         </li>
     @endforeach
     </ul>
+</div>
     
-<h2>Cadastrar um novo cliente </h2>
+<h2 class="text-center">Cadastrar um novo cliente </h2>
 
 @if ($errors->any())
     <div style="color: red;">
@@ -40,19 +29,31 @@
 
 <form action="{{ route('clientes.store') }}" method="POST">
     @csrf
-    
-    <label for="nome">Nome:</label>
-    <input type="text" name="nome" value="{{ old('nome') }}" required><br><br>
 
-    <label for="email">Email:</label>
-    <input type="text" name="email" value="{{ old('email') }}" required><br><br>
+<div class="d-flex justify-content-center">
+    <div class="mb-3">
+        <label for="nome" class="form-label">Nome:</label>
+        <input type="text" class="form-control" name="nome" value="{{ old('nome') }}" required>
+    </div>
 
-    <label for="telefone">Telefone:</label>
-    <input type="text" name="telefone" value="{{ old('telefone') }}" required><br><br>
+    <div class="mb-3">
+        <label for="email" class="form-label">Email:</label>
+        <input type="text" class="form-control" name="email" value="{{ old('email') }}" required>
+    </div>
 
-    <button type=submit>Cadastrar</button>
+    <div class="mb-3">
+        <label for="telefone" class="form-label">Telefone:</label>
+        <input type="text" class="form-control" name="telefone" value="{{ old('telefone') }}" required>
+    </div>
+</div>
 
-    <a href="{{ url('/ordens/') }}">Ver / Cadastrar ordens</a>
+<div class="d-flex justify-content-center">
+
+    <button type=submit class="btn btn-success btn-primary me-4">Cadastrar</button>
+    <a href="{{ url('/ordens/') }}" class="btn btn-info">Ver / Cadastrar ordens</a>
+
+</div>
+
 </form>
-</body>
-</html>
+
+@endsection
