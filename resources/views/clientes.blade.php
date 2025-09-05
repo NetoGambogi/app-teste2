@@ -14,6 +14,12 @@
     @endforeach
     </ul>
 </div>
+
+<div class="text-center">
+    @if (session()->has('message'))
+        {{ session()->get('message') }}
+    @endif
+</div>
     
 <h2 class="text-center">Cadastrar um novo cliente </h2>
 

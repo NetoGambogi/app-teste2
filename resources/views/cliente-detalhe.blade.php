@@ -16,7 +16,7 @@
     </div>
 
 <div class="d-flex justify-content-center mt-3">
-    <a href="{{ route('clientes.edit', $client->id) }}" class="btn btn-info">Atualizar</a>
+    <a href="{{ route('clientes.edit', $client->id) }}" class="btn btn-info btn-primary me-2">Atualizar</a>
 
     <form action="{{ route('clientes.destroy', $client->id) }}" method="POST" style="display:inline;">
         @csrf
@@ -38,7 +38,9 @@
 @else
     <p class="text-center">Esse usuário não possui ordens.</p>
 @endif
-    <a href="{{ url('/clientes/') }}" class="btn btn-secondary">Voltar</a>
 
+<div class="d-flex justify-content-center mt-3">
+    <a href="{{ url('/clientes/') }}" class="btn btn-secondary">Voltar</a>
+</div>
 
 @endsection

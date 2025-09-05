@@ -28,6 +28,12 @@
         </tbody>
     </table>
 
+<div class="text-center">
+    @if (session()->has('message'))
+        {{ session()->get('message') }}
+    @endif
+</div>
+
         <h2 class="text-center">Cadastro de novas ordens</h2>
 
         <!-- Formulário para cadastro de novas ordens --->

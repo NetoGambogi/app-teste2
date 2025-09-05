@@ -39,7 +39,7 @@ class OrdemController extends Controller
 
         Ordem::create($validar);
 
-        return redirect()->route('ordens.index')->with('success', 'Ordem criada com sucesso!');
+        return redirect()->route('ordens.index')->with('message', 'Ordem criada com sucesso!');
     }
 
  
@@ -68,7 +68,7 @@ class OrdemController extends Controller
 
         $ordem->update($validar);
 
-        return redirect()->route('ordens.index')->with('success', 'Ordem atualizada com sucesso!');
+        return redirect()->route('ordens.index')->with('message', 'Ordem atualizada com sucesso!');
     }
 
    
@@ -77,7 +77,7 @@ class OrdemController extends Controller
         $ordem->delete();
 
         return redirect()->route('ordens.index')
-        ->with('success', 'Ordem excluída com sucesso!');
+        ->with('message', 'Ordem excluída com sucesso!');
     }
 }
 

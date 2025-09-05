@@ -17,7 +17,7 @@ class ClienteController extends Controller
             $query->where('nome', 'ilike', "%{$request->nome}%");
         }
 
-        $clients = $query->paginate(20);
+        $clients = $query->paginate(10);
         return view('clientes', compact ('clients'));
     }
 
@@ -31,7 +31,7 @@ class ClienteController extends Controller
 
         $client = Cliente::create($validar);
         return redirect()->route('clientes.index')
-            ->with('sucesso', 'Cliente criado com sucesso.');
+            ->with('message', 'Cliente criado com sucesso.');
     }
 
     public function show(Cliente $client) // Mostrar um cliente específico
@@ -56,13 +56,13 @@ class ClienteController extends Controller
 
         $client->update($validar);
         return redirect()->route('clientes.index')
-                         ->with('success', 'Cliente atualizado com sucesso!');
+                         ->with('message', 'Cliente atualizado com sucesso!');
     }
 
     public function destroy(Cliente $client) // Apagar um cliente
     {
         $client->delete();
         return redirect()->route('clientes.index')
-        ->with('sucesso', 'cliente apagado com suceeso.');
+        ->with('message', 'cliente apagado com sucesso.');
     }
 }
