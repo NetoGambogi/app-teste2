@@ -11,13 +11,17 @@ class ClienteController extends Controller
 
     public function index(Request $request) // Listar os clientes por nome
     {
+
+        $nome = $request->input('nome');
+
         $query = Cliente::query();
 
-        if ($request->has('nome')) {
-            $query->where('nome', 'ilike', "%{$request->nome}%");
+        if ($request->filled('nome')) {
+            $query->where('nome', 'ILIKE', '%' . $request->input('nome') . '%');      // faz o filtro funcionar
         }
 
-        $clients = $query->paginate(10);
+
+        $clients = $query->paginate(10)->withQueryString();
         return view('clientes', compact ('clients'));
     }
 

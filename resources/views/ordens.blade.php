@@ -5,7 +5,17 @@
         <!-- Lista de ordens existentes -->
 
     <h1 class="text-center">Ordens Existentes</h1>
-    <table>
+    
+<form action="{{ route('ordens.index') }}" method="GET">
+    <label for="status">Filtrar por status: </label>
+    <select name="status" id="status" onchange="this.form.submit()">
+        <option value="">Todos</option>
+        
+        <option value="aberta" {{ 'aberta' == 'aberta' ? 'selected' : '' }}>Aberta</option>
+
+    </select>
+</form>
+
 <table class="table">
   <thead>
     <tr>

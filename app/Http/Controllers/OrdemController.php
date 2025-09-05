@@ -12,8 +12,15 @@ class OrdemController extends Controller
 
     public function index(Request $request)     // Lista ordens
     {
+
+        $query = Ordem::query();
+
+        if ($request->filled('status')) {
+            $query->where('status', $request->status); // filtro de ordens
+        }
+
         $clientes = Cliente::all();
-        $ordens = Ordem::with('cliente', 'user')->paginate(15);
+        $ordens = Ordem::with('cliente', 'user')->paginate(10);
 
         return view('ordens', compact('clientes', 'ordens'));
     }

@@ -4,7 +4,19 @@
 
 <h1 class="text-center"> Lista de clientes </h1>
 
+<!-- Filtro de clientes por nome -->
+
 <div class="d-flex justify-content-center">
+    <form action="{{ route('clientes.index') }}">
+        <label for="">Busque um cliente por nome:</label>
+        <input type="text" name="nome" value="{{ request('nome') }}">
+        <button type="submit" class="btn btn-info">Filtrar</button>
+    </form>
+</div>
+
+<!-- Lista de clientes, 10 por página -->
+
+<div class="d-flex justify-content-center mt-2">
     <ul class="list-group w-50">
         @foreach ($clients as $client)
             <li class="list-group-item d-flex justify-content-between">
@@ -15,11 +27,15 @@
     </ul>
 </div>
 
+<!-- Mensagem de sucesso -->
+
 <div class="text-center">
     @if (session()->has('message'))
         {{ session()->get('message') }}
     @endif
 </div>
+
+<!-- Cadastro de novos clientes -->
     
 <h2 class="text-center">Cadastrar um novo cliente </h2>
 
