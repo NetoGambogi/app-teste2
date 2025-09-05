@@ -20,7 +20,8 @@ class OrdemController extends Controller
         }
 
         $clientes = Cliente::all();
-        $ordens = Ordem::with('cliente', 'user')->paginate(10);
+
+        $ordens = $query->with('cliente', 'user')->paginate(10);
 
         return view('ordens', compact('clientes', 'ordens'));
     }

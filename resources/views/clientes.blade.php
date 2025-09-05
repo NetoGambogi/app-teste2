@@ -27,6 +27,11 @@
     </ul>
 </div>
 
+<div class="d-flex justify-content-center">
+    {{ $clients->links('pagination::bootstrap-5') }}
+</div>
+
+
 <!-- Mensagem de sucesso -->
 
 <div class="text-center">

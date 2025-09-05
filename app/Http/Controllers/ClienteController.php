@@ -22,6 +22,7 @@ class ClienteController extends Controller
 
 
         $clients = $query->paginate(10)->withQueryString();
+        
         return view('clientes', compact ('clients'));
     }
 

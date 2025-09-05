@@ -2,19 +2,27 @@
 
 @section('content')
 
-        <!-- Lista de ordens existentes -->
+
 
     <h1 class="text-center">Ordens Existentes</h1>
     
+<!-- Filtro de ordens -->
+
+<div class="d-flex justify-content-center">
 <form action="{{ route('ordens.index') }}" method="GET">
     <label for="status">Filtrar por status: </label>
     <select name="status" id="status" onchange="this.form.submit()">
-        <option value="">Todos</option>
-        
-        <option value="aberta" {{ 'aberta' == 'aberta' ? 'selected' : '' }}>Aberta</option>
+    
+    <option value="">Todos</option>  
+    <option value="aberta" @selected(request('status') == 'aberta')>Aberta</option>
+    <option value="em_andamento" @selected(request('status') == 'em_andamento')>Em andamento</option>
+    <option value="concluida" @selected(request('status') == 'concluida')>Concluida</option>
 
     </select>
 </form>
+</div>
+
+<!-- Lista de ordens existentes -->
 
 <table class="table">
   <thead>
@@ -37,6 +45,10 @@
             @endforeach
         </tbody>
     </table>
+
+<div class="d-flex justify-content-center">
+    {{ $ordens->links('pagination::bootstrap-5') }}
+</div>
 
 <div class="text-center">
     @if (session()->has('message'))
