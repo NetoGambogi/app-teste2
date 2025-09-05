@@ -26,6 +26,13 @@ class ClienteController extends Controller
         return view('clientes', compact ('clients'));
     }
 
+        public function create()     // Exibe formulário de criação
+    {
+        $clientes = Cliente::all();
+        return view('cliente-create', compact('clientes'));
+    }
+
+
     public function store(Request $request) // Salvar um novo cliente
     {
         $validar = $request->validate([
@@ -68,6 +75,6 @@ class ClienteController extends Controller
     {
         $client->delete();
         return redirect()->route('clientes.index')
-        ->with('message', 'cliente apagado com sucesso.');
+        ->with('message', 'Cliente apagado com sucesso.');
     }
 }

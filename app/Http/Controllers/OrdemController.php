@@ -30,7 +30,7 @@ class OrdemController extends Controller
     public function create()     // Exibe formulário de criação
     {
         $clientes = Cliente::all();
-        return view('ordens.create', compact('clientes'));
+        return view('ordem-create', compact('clientes'));
     }
 
 
@@ -46,7 +46,6 @@ class OrdemController extends Controller
         $validar['user_id'] = Auth::id() ?? 1; // temporário
 
         Ordem::create($validar);
-
         return redirect()->route('ordens.index')->with('message', 'Ordem criada com sucesso!');
     }
 

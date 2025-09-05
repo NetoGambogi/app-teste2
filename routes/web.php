@@ -15,34 +15,35 @@ Route::get('/logout', function () {
 })->name('logout');
 
         // Ordens
-
-Route::get('ordens', [OrdemController::class, 'index'])->name('ordens.index'); // Lista de ordens
-Route::get('ordens/{ordem}', [OrdemController::class, 'show'])->name('ordem.show'); // Detalhe da ordem
-
         // Necessário permissão is_admin
 
 Route::middleware(['auth', 'admin'])->group(function () {
-    
-Route::post('ordens', [OrdemController::class, 'store'])->name('ordens.store'); // Criar uma nova ordem
+
+Route::post('ordens/', [OrdemController::class, 'store'])->name('ordens.store'); // Criar uma nova ordem
+Route::get('ordens/create', [OrdemController::class, 'create'])->name('ordens.create');
 Route::get('ordens/{ordem}/edit', [OrdemController::class, 'edit'])->name('ordem.edit'); // Atualizar ordem
 Route::put('ordens/{ordem}', [OrdemController::class, 'update'])->name('ordem.update');
 Route::delete('ordens/{ordem}', [OrdemController::class, 'destroy'])->name('ordem.destroy'); // Apagar ordem
 
 });
 
-        // Clientes
+Route::get('ordens', [OrdemController::class, 'index'])->name('ordens.index'); // Lista de ordens
+Route::get('ordens/{ordem}', [OrdemController::class, 'show'])->name('ordem.show'); // Detalhe da ordem
 
-Route::get('clientes', [ClienteController::class, 'index'])->name('clientes.index'); // Lista de clientes
-Route::get('clientes/{client}', [ClienteController::class, 'show'])->name('clientes.show'); // Detalhe dos clientes
+        // Clientes
 
 Route::middleware(['auth', 'admin'])->group(function () {
 
 Route::post('clientes', [ClienteController::class, 'store'])->name('clientes.store'); // Criar novo clientes
+Route::get('clientes/create', [ClienteController::class, 'create'])->name('clientes.create');
 Route::get('clientes/{client}/edit', [ClienteController::class, 'edit'])->name('clientes.edit'); // Atualizar cliente
 Route::put('clientes/{client}', [ClienteController::class, 'update'])->name('clientes.update');
 Route::delete('clientes/{client}', [ClienteController::class, 'destroy'])->name('clientes.destroy'); // Apagar cliente
 
 });
+
+Route::get('clientes', [ClienteController::class, 'index'])->name('clientes.index'); // Lista de clientes
+Route::get('clientes/{client}', [ClienteController::class, 'show'])->name('clientes.show'); // Detalhe dos clientes
 
         // Autenticação - Breeze
         

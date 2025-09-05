@@ -18,20 +18,18 @@
     <label for="descricao" class="form-label">Descrição:</label>
     <input type="text" class="form-control" name="descricao" value="{{ old('descricao', $ordem->descricao) }}" required>
 </div>
-
-<div class="mb-3">
-    <label for="status" class="form-label">Status:</label>
-    <input type="text" class="form-control" name="status" value="{{ old('status', $ordem->status) }}" required>
-</div>
     
-    <!-- <div class="mb-3">
-      <label for="status" class="form-label">Status</label>
-      <select class="form-select" name="status" required>
-            <option value="aberta">Aberta</option>
-            <option value="em_andamento">Em Andamento</option>
-            <option value="concluida">Concluída</option>
-      </select>
-    </div> -->
+<!-- Precisa deixar pre-definido o valor antigo -->
+
+    <label for="status">Status:</label>
+    <ul>
+        <li><input type="radio" name="status" id="aberta" value="aberta">
+            <label for="aberta">Aberta</label></li>
+        <li><input type="radio" name="status" id="em_andamento" value="em_andamento">
+            <label for="em_andamento">Em andamento</label></li>
+        <li><input type="radio" name="status" id="concluida" value="concluida">
+            <label for="concluida">Concluída</label></li>
+    </ul>
 
 
 <div class="mb-3">
