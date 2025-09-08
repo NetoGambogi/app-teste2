@@ -30,7 +30,7 @@
       <th scope="col">Título</th>
       <th scope="col">Cliente</th>
       <th scope="col">Status</th>
-      <th scope="col">Criada em</th>
+      <th scope="col">Atualizada em</th>
         <th scope="col">Detalhes</th>
     </tr>
   </thead>
@@ -39,7 +39,7 @@
                     <td>{{ $ordem->titulo }}</td>
                     <td>{{ $ordem->cliente->nome }}</td>
                     <td>{{ ucfirst($ordem->status) }}</td>
-                    <td>{{ $ordem->created_at->format('d/m/Y H:i') }}</td>
+                    <td>{{ $ordem->updated_at->format('d/m/Y H:i') }}</td>
                     <td><a href="{{ route('ordem.show', $ordem->id) }}" class="btn btn-primary">Detalhes</a></td>
                 </tr>
             @endforeach

@@ -6,6 +6,7 @@ use App\Models\Ordem;
 use App\Models\Cliente;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\OrdemRequest;
 
 class OrdemController extends Controller
 {
@@ -34,18 +35,12 @@ class OrdemController extends Controller
     }
 
 
-    public function store(Request $request)     // Salva nova ordem
+    public function store(OrdemRequest $request)     // Salva nova ordem
     {
-        $validar = $request->validate([
-            'titulo' => 'required|min:3',
-            'descricao' => 'nullable',
-            'status' => 'in:aberta,em_andamento,concluida',
-            'cliente_id' => 'required|exists:clientes,id',
-        ]);
+        
+        $dadosValidados = $request->validated();
+        $ordem = Ordem::create($dadosValidados);
 
-        $validar['user_id'] = Auth::id() ?? 1; // temporário
-
-        Ordem::create($validar);
         return redirect()->route('ordens.index')->with('message', 'Ordem criada com sucesso!');
     }
 
@@ -64,17 +59,9 @@ class OrdemController extends Controller
     }
 
  
-    public function update(Request $request, Ordem $ordem)    // Atualiza ordem existente
+    public function update(OrdemRequest $request, Ordem $ordem)    // Atualiza ordem existente
     {
-        $validar = $request->validate([
-            'titulo' => 'required|min:3',
-            'descricao' => 'nullable',
-            'status' => 'in:aberta,em_andamento,concluida',
-            'cliente_id' => 'required|exists:clientes,id',
-        ]);
-
-        $ordem->update($validar);
-
+        $ordem->update($request->validated());
         return redirect()->route('ordens.index')->with('message', 'Ordem atualizada com sucesso!');
     }
 
