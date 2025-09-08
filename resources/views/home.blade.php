@@ -12,11 +12,11 @@
             </div>
 
             <div class="d-grid gap-3">
-                <a href="{{ route('clientes.index') }}" class="btn btn-outline-secondary btn-lg py-3">
+                <a href="" class="btn btn-outline-secondary btn-lg py-3">
                     Gerenciar Clientes
                 </a>
                 
-                <a href="{{ route('ordens.index') }}" class="btn btn-outline-secondary btn-lg py-3">
+                <a href="{{ route('requerente.chamados.create') }}" class="btn btn-outline-secondary btn-lg py-3">
                     Ver Ordens de Serviço
                 </a>
 

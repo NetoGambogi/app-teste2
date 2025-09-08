@@ -2,8 +2,12 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ClienteController;
-use App\Http\Controllers\OrdemController;
+use App\Http\Controllers\RequerenteController;
+use App\Http\Controllers\ResponsavelController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\AdminChamadoController;
+use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\HomeController;
 
 Route::get('/', function () {
@@ -19,36 +23,29 @@ Route::get('/logout', function () {
 
 Route::get('home', [HomeController::class, 'index'])->name('home.index');
 
-        // Ordens
-        // Necessário permissão is_admin
+        // Rotas do requerente: 
 
-Route::middleware(['auth', 'admin'])->group(function () {
-
-Route::post('ordens/', [OrdemController::class, 'store'])->name('ordens.store'); // Criar uma nova ordem
-Route::get('ordens/create', [OrdemController::class, 'create'])->name('ordens.create');
-Route::get('ordens/{ordem}/edit', [OrdemController::class, 'edit'])->name('ordem.edit'); // Atualizar ordem
-Route::put('ordens/{ordem}', [OrdemController::class, 'update'])->name('ordem.update');
-Route::delete('ordens/{ordem}', [OrdemController::class, 'destroy'])->name('ordem.destroy'); // Apagar ordem
-
+Route::middleware(['auth', 'role:requerente'])->prefix('requerente')->name('requerente.')->group(function () {
+        Route::get('/dashboard', [RequerenteController::class, 'index'])->name('dashboard');
+        Route::get('/chamados/novo', [RequerenteController::class,'create'])->name('chamados.create');
+        Route::post('/chamados', [RequerenteController::class, 'store'])->name('chamados.store');
+        Route::get('/chamados/{id}', [RequerenteController::class, 'show'])->name('chamados.show');
 });
 
-Route::get('ordens', [OrdemController::class, 'index'])->name('ordens.index'); // Lista de ordens
-Route::get('ordens/{ordem}', [OrdemController::class, 'show'])->name('ordem.show'); // Detalhe da ordem
-
-        // Clientes
-
-Route::middleware(['auth', 'admin'])->group(function () {
-
-Route::post('clientes', [ClienteController::class, 'store'])->name('clientes.store'); // Criar novo clientes
-Route::get('clientes/create', [ClienteController::class, 'create'])->name('clientes.create');
-Route::get('clientes/{client}/edit', [ClienteController::class, 'edit'])->name('clientes.edit'); // Atualizar cliente
-Route::put('clientes/{client}', [ClienteController::class, 'update'])->name('clientes.update');
-Route::delete('clientes/{client}', [ClienteController::class, 'destroy'])->name('clientes.destroy'); // Apagar cliente
-
+        // Rotas do responsável
+Route::middleware(['auth', 'role:responsavel,admin'])->prefix('responsavel')->name('responsavel.')->group(function () {
+        Route::get('/dashboard', [ResponsavelController::class, 'index'])->name('dashboard');
+        Route::get('/chamados/fila', [ResponsavelController::class,'fila'])->name('chamados.fila');
+        Route::post('/chamados/{id}/aceitar', [ResponsavelController::class, 'aceitar'])->name('chamados.aceitar');
+        Route::patch('/chamados/{id}/status', [ResponsavelController::class, 'updateStatus'])->name('chamados.updateStatus');
 });
 
-Route::get('clientes', [ClienteController::class, 'index'])->name('clientes.index'); // Lista de clientes
-Route::get('clientes/{client}', [ClienteController::class, 'show'])->name('clientes.show'); // Detalhe dos clientes
+        // Rotas do admin
+Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
+        Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
+        Route::resource('/usuarios', AdminUserController::class);
+        Route::resource('/chamados', AdminChamadoController::class);
+});
 
         // Autenticação - Breeze
         

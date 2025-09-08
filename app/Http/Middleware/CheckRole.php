@@ -7,19 +7,18 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Redirect;
 
-class AdminMiddleware
+class CheckRole
 {
     /**
      * Handle an incoming request.
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next, ...$roles): Response
     {
-        if (!auth()->check() || !auth()->user()->is_admin) {
-            return Redirect::back()->with('error', 'Você precisa ser administrador para isso.');
+        if (!in_array ($request->user()->role, $roles)) {
+            return Redirect::back()->with('error', 'Você não tem essa autorização.');
         }
-
         return $next($request);
     }
 }
