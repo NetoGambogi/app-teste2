@@ -20,15 +20,7 @@
 </form>
 </div>
 
-<!-- Mensagem de sucesso -->
-
-    <div class="text-center">
-        <h2 class="text-success">
-        @if (session()->has('message'))
-            {{ session()->get('message') }}
-        @endif
-        </h2>
-    </div>
+<x-alertas /> <!-- Exibe mensagens de erro/sucesso -->
 
 <!-- Lista de ordens existentes -->
 

@@ -26,6 +26,8 @@
 
     </div>
 
+<x-alertas /> <!-- Exibe mensagens de erro/sucesso -->
+
     <h2 class="text-center mt-3">Cliente responsável pela ordem:</h2>
 
 <div class="d-flex justify-content-center mt-2">

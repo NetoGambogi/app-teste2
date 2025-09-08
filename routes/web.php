@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\OrdemController;
+use App\Http\Controllers\HomeController;
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -13,6 +14,10 @@ Route::get('/logout', function () {
     Auth::logout();
     return redirect()->route('login');  // Botão para deslogar o usuário e retornar a tela de login
 })->name('logout');
+
+        // Página inicial
+
+Route::get('home', [HomeController::class, 'index'])->name('home.index');
 
         // Ordens
         // Necessário permissão is_admin

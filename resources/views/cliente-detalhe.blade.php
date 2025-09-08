@@ -25,6 +25,8 @@
     </form>
 </div>
 
+<x-alertas /> <!-- Exibe mensagens de erro/sucesso -->
+
     <h2 class="text-center">Ordem do cliente: </h2>
 @if ($ordem)
     <div class="d-flex justify-content-center">
