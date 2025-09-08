@@ -21,7 +21,7 @@ class OrdemController extends Controller
 
         $clientes = Cliente::all();
 
-        $ordens = $query->with('cliente', 'user')->paginate(10);
+        $ordens = $query->with('cliente', 'user')->paginate(10)->withQueryString();
 
         return view('ordens', compact('clientes', 'ordens'));
     }

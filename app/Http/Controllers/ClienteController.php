@@ -5,11 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Cliente;
 use App\Models\Ordem;
 use Illuminate\Http\Request;
+use App\Http\Requests\ClientesRequest;
 
 class ClienteController extends Controller
 {
 
-    public function index(Request $request) // Listar os clientes por nome
+    // Listar os clientes por nome
+
+    public function index(Request $request) 
     {
 
         $nome = $request->input('nome');
@@ -26,27 +29,29 @@ class ClienteController extends Controller
         return view('clientes', compact ('clients'));
     }
 
-        public function create()     // Exibe formulário de criação
+    // Exibe formulário de criação
+
+        public function create()     
     {
         $clientes = Cliente::all();
         return view('cliente-create', compact('clientes'));
     }
 
+    // Salvar um novo cliente
 
-    public function store(Request $request) // Salvar um novo cliente
+    public function store(ClientesRequest $request) 
     {
-        $validar = $request->validate([
-            'nome' => 'required|min:3',
-            'email' => 'email|unique:clientes,email',
-            'telefone' => 'nullable'
-        ]);
 
-        $client = Cliente::create($validar);
+        $dadosValidados = $request->validated();
+        $client = Cliente::create($dadosValidados);
+
         return redirect()->route('clientes.index')
             ->with('message', 'Cliente criado com sucesso.');
     }
 
-    public function show(Cliente $client) // Mostrar um cliente específico
+    // Mostrar um cliente específico
+
+    public function show(Cliente $client) 
     {
         $ordem = Ordem::where('cliente_id', $client->id)->latest()->first();
         return view('cliente-detalhe', compact ('client', 'ordem'));
@@ -57,21 +62,18 @@ class ClienteController extends Controller
         return view('clientes-edit', compact ('client'));
     }
 
-    public function update(Request $request, Cliente $client) // Atualizar um cliente já salvo
+    // Atualizar um cliente já salvo
+
+    public function update(ClientesRequest $request, Cliente $client) 
     {
-
-        $validar = $request->validate([
-            'nome' => 'required|min:3',
-            'email' => 'email|unique:clientes,email,'.$client->id,
-            'telefone' => 'nullable'
-        ]);
-
-        $client->update($validar);
+        $client->update($request->validated());
         return redirect()->route('clientes.index')
                          ->with('message', 'Cliente atualizado com sucesso!');
     }
 
-    public function destroy(Cliente $client) // Apagar um cliente
+    // Apagar um cliente
+
+    public function destroy(Cliente $client) 
     {
         $client->delete();
         return redirect()->route('clientes.index')
