@@ -4,10 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Chamado extends Model
 {
     use HasFactory;
+
+    public $timestamps = true;
 
     protected $table = 'chamado';
 
@@ -15,7 +18,11 @@ class Chamado extends Model
         'requerente_id', 'responsavel_id', 'titulo', 'descricao', 'status', 'data_conclusao' 
     ];
 
-    public function user() {
-        return $this->belongsTo(User::class, 'requerente_id', 'responsavel_id')
+    public function requerente(): BelongsTo {
+        return $this->belongsTo(User::class, 'requerente_id');
+    }
+
+    public function responsavel(): BelongsTo {
+        return $this->belongsTo(User::class, 'responsavel_id');
     }
 }

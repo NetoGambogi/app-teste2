@@ -29,7 +29,8 @@ Route::middleware(['auth', 'role:requerente'])->prefix('requerente')->name('requ
         Route::get('/dashboard', [RequerenteController::class, 'index'])->name('dashboard');
         Route::get('/chamados/novo', [RequerenteController::class,'create'])->name('chamados.create');
         Route::post('/chamados', [RequerenteController::class, 'store'])->name('chamados.store');
-        Route::get('/chamados/{id}', [RequerenteController::class, 'show'])->name('chamados.show');
+        Route::get('/chamados/{chamado}', [RequerenteController::class, 'show'])->name('chamados.show');
+        Route::delete('/chamados/{chamado}', [RequerenteController::class, 'destroy'])->name('chamados.destroy');
 });
 
         // Rotas do responsável

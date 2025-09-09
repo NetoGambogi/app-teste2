@@ -22,14 +22,10 @@ class ChamadosRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'requerente_id' => ['required', 'exists:users,id'],
             'titulo' => ['required', 'min:3',],
-            'descricao' => ['nullable',],
-            'status' => ['required', 'in:aberta,em_andamento,concluida',],
-            'data_conclusao' => ['date'],
+            'descricao' => ['required',],
         ];
     }
-}
 
 public function messages(): array
     {
@@ -40,9 +36,12 @@ public function messages(): array
         'titulo.required' => 'O campo título é obrigatório.',
         'titulo.min' => 'O título deve ter no mínimo :min caracteres.',
 
+        'descricao.required' => 'A descrição é obrigatória.',
+
         'status.required' => 'O campo status é obrigatório.',
         'status.in' => 'Por favor, selecione um status válido (Aberta, Em Andamento ou Concluída).',
 
         'data_conclusao.date' => 'O campo data de conclusão deve conter uma data válida.',
-        ]
+        ];
     }
+}
