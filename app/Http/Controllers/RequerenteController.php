@@ -33,7 +33,7 @@ class RequerenteController extends Controller
 
     public function store(ChamadosRequest $request) {
         
-        // 1. Pegue os dados validados do formulário (seu código já faz isso)
+        // 1. Pegue os dados validados do formulário 
         $dadosValidados = $request->validated();
 
         // 2. CRIE UM NOVO ARRAY combinando os dados validados com os dados do sistema
@@ -57,6 +57,16 @@ class RequerenteController extends Controller
     }
 
         return view('requerente.chamados.show', compact('chamado'));
+    }
+
+    public function edit(Chamado $chamado) {
+        return view('requerente.chamados.edit', compact('chamado'));
+    }
+
+    public function update(ChamadosRequest $request, Chamado $chamado) {
+
+        $chamado->update($request->validated());
+        return redirect()->route('requerente.chamados.show', $chamado)->with('message', 'Chamado atualizado com sucesso!');
     }
 
     public function destroy(Chamado $chamado) {

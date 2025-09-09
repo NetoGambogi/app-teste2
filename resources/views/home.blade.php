@@ -12,12 +12,16 @@
             </div>
 
             <div class="d-grid gap-3">
-                <a href="" class="btn btn-outline-secondary btn-lg py-3">
-                    Gerenciar Clientes
+                <a href="{{ route('responsavel.dashboard') }}" class="btn btn-outline-secondary btn-lg py-3">
+                    Você responsável
                 </a>
                 
-                <a href="{{ route('requerente.chamados.create') }}" class="btn btn-outline-secondary btn-lg py-3">
-                    Ver Ordens de Serviço
+                <a href="{{ route('requerente.dashboard') }}" class="btn btn-outline-secondary btn-lg py-3">
+                    Veja seus chamados
+                </a>
+
+                <a href="{{ route('admin.dashboard') }}" class="btn btn-outline-secondary btn-lg py-3">
+                    Administrador
                 </a>
 
                 </div>

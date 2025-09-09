@@ -54,7 +54,7 @@ class OrdemController extends Controller
 
     public function edit(Ordem $ordem)     // Exibe formulário de edição
     {
-        $clientes = \App\Models\Cliente::all();
+        $clientes = Cliente::all();
         return view('ordem-edit', compact('ordem', 'clientes'));
     }
 

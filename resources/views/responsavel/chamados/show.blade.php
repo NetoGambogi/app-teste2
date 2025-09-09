@@ -16,22 +16,8 @@
         </ul>
     </div>
 
-    <div class="d-flex justify-content-center mt-3">
-
-        <a href="{{ route('requerente.chamados.edit', $chamado->id) }}" class="btn btn-info btn-primary me-2">Atualizar</a>
-
-    <form action="{{ route('requerente.chamados.destroy', $chamado->id) }}" method="POST" style="display:inline;">
-        @csrf
-        @method('DELETE')
-        <button type="submit" class="btn btn-danger" onclick="return confirm('tem certeza que deseja apagar esta ordem?')">Deletar</button>
-    </form>
-
-        <a href="{{ route('requerente.dashboard') }}" class="btn btn-secondary">Voltar</a>
-
+            <a href="{{ route('responsavel.dashboard') }}" class="btn btn-secondary">Voltar</a>
+            <a href="{{ route('responsavel.chamados.edit', $chamado->id) }}" class="btn btn-info">Atualizar Status</a>
     </div>
 
-<x-alertas /> <!-- Exibe mensagens de erro/sucesso -->
-
 @endsection
-</body>
-</html>

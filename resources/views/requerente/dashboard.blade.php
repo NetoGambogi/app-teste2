@@ -12,6 +12,11 @@
         </li>
     @endforeach
     </ul>
+</div>
+
+    <a href="{{ route('requerente.chamados.create') }}" class="btn btn-primary">
+            Criar novo
+    </a>
 
 
 @endsection
