@@ -60,7 +60,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
 
         // Controle dos chamados
         Route::get('/chamados', [AdminController::class, 'chamados'])->name('chamados.index');
-        Route::get('/chamados/{chamado}', [AdminController::class, 'showChamado'])->name('chamado.show'); // mostra os detalhes do usuario
+        Route::get('/chamados/{chamado}', [AdminController::class, 'showChamado'])->name('chamados.show'); // mostra os detalhes do usuario
         Route::get('/chamados/{chamado}/edit', [AdminController::class, 'editChamado'])->name('chamados.edit'); // exibe o formulario de edição de um chamado
         Route::put('/chamados/{chamado}', [AdminController::class, 'updateChamado'])->name('chamados.update'); // salva as informações atualizadas do chamado
         Route::delete('/chamados/{chamado}', [AdminController::class, 'destroyChamado'])->name('chamados.destroy'); // apaga um chamado

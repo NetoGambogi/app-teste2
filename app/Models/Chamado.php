@@ -18,6 +18,11 @@ class Chamado extends Model
         'requerente_id', 'responsavel_id', 'titulo', 'descricao', 'status', 'data_conclusao' 
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function requerente(): BelongsTo {
         return $this->belongsTo(User::class, 'requerente_id');
     }

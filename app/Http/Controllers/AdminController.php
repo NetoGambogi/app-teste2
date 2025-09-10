@@ -19,8 +19,17 @@ class AdminController extends Controller
 
     public function index()
     {
-        $usuarios = User::where('role', '!=', 'admin')->get();
-        return view('admin.users.index');
+        $users = User::where('role', '!=', 'admin')->get();
+        return view('admin.users.index', compact('users'));
+    }
+
+        public function show(User $user, Chamado $chamado)
+    {
+
+    $chamado = Chamado::where('responsavel_id', $user->id)
+    ->orWhere('requerente_id', $user->id)
+    ->latest()->first();
+    return view('admin.users.show', compact('user','chamado'));
     }
 
     public function edit(User $user)
@@ -31,7 +40,7 @@ class AdminController extends Controller
     public function update(UpdateUserRequest $request, User $user)
     {
         $user->update($request->validated());
-        return redirect()->route('admin.users.show', $user)->with('success', 'Usuário atualizado com sucesso.');
+        return redirect()->route('admin.usuarios.show', $user)->with('success', 'Usuário atualizado com sucesso.');
     }
 
     public function destroy(User $user)
