@@ -23,11 +23,11 @@ class UpdateChamadoRequest extends FormRequest
     {
         return [
             'titulo' => ['required', 'min:3',],
-            'requerente_id' => ['required']
-            'responsavel_id' => ['nullable']
+            'requerente_id' => ['required'],
+            'responsavel_id' => ['nullable'],
             'descricao' => ['required',],
-            'status' => ['required', 'in:aberta,em_andamento,concluida,cancelada']
-            'data_conclusao' => ['nullable', 'date']
+            'status' => ['required', 'in:aberta,em_andamento,concluida,cancelada'],
+            'data_conclusao' => ['nullable', 'date'],
         ];
     }
 

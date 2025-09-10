@@ -23,7 +23,7 @@ class UpdateUserRequest extends FormRequest
     {
         return [
             'name' => ['required', 'min:3',],
-            'email' => ['required', 'email',],
+            'email' => ['required', 'email', Rule::unique('users')->ignore($this->user)],
             'role' => ['in:requerente,responsavel,admin', 'required',],
         ];
     }
@@ -36,6 +36,8 @@ class UpdateUserRequest extends FormRequest
 
             'email.required' => 'O email é obrigatório',
             'email.email' => 'O email precisa ser válido',
-        ]
+
+            'email.unique' => 'Esse email já está cadastrado.',
+        ];
     }
 }

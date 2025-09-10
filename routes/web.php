@@ -47,9 +47,10 @@ Route::middleware(['auth', 'role:responsavel,admin'])->prefix('responsavel')->na
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
 
         // Painel do admin
-        Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard'); // painel do admin
+        Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard'); // painel do admin
 
         // Controle dos usuários
+        Route::get('/usuarios', [AdminController::class, 'index'])->name('usuarios.index');
         Route::get('/usuarios/novo', [AdminController::class,'create'])->name('usuarios.create'); // exibe o formulário para criar um novo usuario
         Route::post('/usuarios', [AdminController::class, 'store'])->name('usuarios.store'); // salva as informações do novo usuario
         Route::get('/usuarios/{user}', [AdminController::class, 'show'])->name('usuarios.show'); // mostra os detalhes do usuario
@@ -58,9 +59,11 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
         Route::delete('/usuarios/{user}', [AdminController::class, 'destroy'])->name('usuarios.destroy'); // apaga um usuario
 
         // Controle dos chamados
-        Route::get('/chamados/{chamado}/edit', [AdminController::class, 'edit'])->name('chamados.edit'); // exibe o formulario de edição de um chamado
-        Route::put('/chamados/{chamado}', [AdminController::class, 'update'])->name('chamados.update'); // salva as informações atualizadas do chamado
-        Route::delete('/chamados/{chamado}', [AdminController::class, 'destroy'])->name('chamados.destroy'); // apaga um chamado
+        Route::get('/chamados', [AdminController::class, 'chamados'])->name('chamados.index');
+        Route::get('/chamados/{chamado}', [AdminController::class, 'showChamado'])->name('chamado.show'); // mostra os detalhes do usuario
+        Route::get('/chamados/{chamado}/edit', [AdminController::class, 'editChamado'])->name('chamados.edit'); // exibe o formulario de edição de um chamado
+        Route::put('/chamados/{chamado}', [AdminController::class, 'updateChamado'])->name('chamados.update'); // salva as informações atualizadas do chamado
+        Route::delete('/chamados/{chamado}', [AdminController::class, 'destroyChamado'])->name('chamados.destroy'); // apaga um chamado
 
 });
 
