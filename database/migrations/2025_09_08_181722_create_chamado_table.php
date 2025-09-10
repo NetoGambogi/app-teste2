@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('chamado', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('requerente_id')->constrained('users');
-            $table->foreignId('responsavel_id')->nullable()->constrained('users');
+            $table->foreignId('requerente_id')->nullable()->references('id')->on('users')->onDelete('set null');
+            $table->foreignId('responsavel_id')->nullable()->references('id')->on('users')->onDelete('set null');
             $table->string('titulo');
             $table->text('descricao');
             $table->enum('status', ['aberta', 'em_andamento', 'concluida', 'cancelada'])->default('aberta');

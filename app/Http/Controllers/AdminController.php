@@ -17,7 +17,7 @@ class AdminController extends Controller
 
     // Funções dos usuários
 
-    public function index()
+    public function index(Request $request)
     {
         $users = User::where('role', '!=', 'admin')->get();
         return view('admin.users.index', compact('users'));
@@ -40,13 +40,13 @@ class AdminController extends Controller
     public function update(UpdateUserRequest $request, User $user)
     {
         $user->update($request->validated());
-        return redirect()->route('admin.usuarios.show', $user)->with('success', 'Usuário atualizado com sucesso.');
+        return redirect()->route('admin.usuarios.show', $user)->with('message', 'Usuário atualizado com sucesso.');
     }
 
     public function destroy(User $user)
     {
         $user->delete();
-        return redirect()->route('admin.users.index')->with('success', 'Usuário excluido com sucesso');
+        return redirect()->route('admin.usuarios.index')->with('message', 'Usuário excluido com sucesso');
     }
 
 
@@ -55,6 +55,8 @@ class AdminController extends Controller
     public function chamados()
     {
         $chamados = Chamado::all();
+        $chamados = Chamado::paginate(10)->withQueryString();
+
 
         return view('admin.chamados.index', compact('chamados'));
     }
@@ -64,10 +66,12 @@ class AdminController extends Controller
         return view('admin.chamados.show', compact('chamado'));
     }
 
-    public function editChamado(Chamado $chamado)
+    public function editChamado(Chamado $chamado, Request $request)
     {
+    $requerentes = User::where('role', 'requerente')->get();
+    $responsaveis = User::where('role', 'responsavel')->get();
 
-    return view('admin.chamados.edit', compact('chamado'));
+    return view('admin.chamados.edit', compact('chamado', 'requerentes', 'responsaveis'));
     }
 
     public function updateChamado(UpdateChamadoRequest $request, Chamado $chamado) 
@@ -80,7 +84,7 @@ class AdminController extends Controller
     public function destroyChamado(Chamado $chamado)
     {
         $chamado->delete();
-        return redirect()->route('admin.chamados.index')->with('success', 'Chamado excluído.');
+        return redirect()->route('admin.chamados.index')->with('message', 'Chamado excluído.');
     }
 
 

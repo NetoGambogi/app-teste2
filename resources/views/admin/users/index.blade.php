@@ -15,4 +15,7 @@
     </ul>
 </div>
 
+<div class="d-flex justify-content-center mt-3">
+    <a href="{{ url('admin/dashboard') }}" class="btn btn-secondary">Voltar</a>
+</div>
 @endsection
