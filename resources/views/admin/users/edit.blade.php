@@ -2,6 +2,8 @@
 
 @section('content')
 
+<x-alertas />
+
 <h1 class="text-center">Editar Cliente</h1>
     <form action="{{route('admin.usuarios.update', $user->id )}}" method="POST">
         @csrf 

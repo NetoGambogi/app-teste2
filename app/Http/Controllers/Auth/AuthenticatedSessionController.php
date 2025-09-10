@@ -28,7 +28,15 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('home.index', absolute: false));
+        $role = Auth::user()->role;
+
+        $redirectMap = [
+            'admin' => 'admin.dashboard',
+            'responsavel' => 'responsavel.dashboard',
+            'requerente' => 'requerente.dashboard',
+        ];
+
+        return redirect()->intended(route($redirectMap[$role] ??'home.index'));
     }
 
     /**

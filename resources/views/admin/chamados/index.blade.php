@@ -2,7 +2,9 @@
 
 @section('content')
 
-<h1>Chamados</h1>
+<h1 class="text-center">Chamados</h1>
+
+<x-alertas />
 
 <table class="table">
   <thead>

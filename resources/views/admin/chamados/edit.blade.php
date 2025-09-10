@@ -1,6 +1,9 @@
 @extends('layouts.admin')
 
 @section('content')
+
+<x-alertas />
+
     <h1 class="text-center">Editar ordem</h1>
     <form action="{{route('admin.chamados.update', $chamado->id )}}" method="POST">
         @csrf 
@@ -74,7 +77,9 @@
         <span class="text-danger">{{ $errors->first('status') }}</span>
     </ul>
 
-<div class="d-flex justify-content-center">
+</div>
+
+<div class="d-flex justify-content-center mt-3">
     <button type=submit class="btn btn-success btn-primary me-2">Salvar</button>
     <a href="{{ route('admin.chamados.show', $chamado) }}" class="btn btn-secondary">Voltar</a>
 </div>

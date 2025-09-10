@@ -38,7 +38,7 @@
     </ul>
     </div>
 @else
-    <p class="text-center">Esse usuário não possui ordens.</p>
+    <p class="text-center">Esse usuário não possui chamados.</p>
 @endif
 
 <div class="d-flex justify-content-center mt-3">

@@ -3,25 +3,23 @@
 @section('content')
 
 
-<h1>teste da fila</h1>
-
-<h2>chamados abertos:</h2>
+<h1 class="text-center">Fila de chamados</h1>
 
 <x-alertas />
 
 @if($chamadosAbertos->isEmpty())
 
-    <p>Não há chamados abertos disponiveis no momento.</p>
+    <h2 class="text-center">Não há nenhum chamado na fila.</h2>
 
 @else 
 
-    <table>
+    <table class="table">
         <thead>
             <tr>
-                <th>Titulo</th>
-                <th>Descricao</th>
-                <th>Criado em</th>
-                <th>Ações</th>
+                <th scope="col">Titulo</th>
+                <th scope="col">Descricao</th>
+                <th scope="col">Criado em</th>
+                <th scope="col">Ações</th>
             </tr>
         </thead>
         <tbody>
@@ -45,21 +43,21 @@
 
 <!-- Chamados aceitos -->
 
-<h2>Chamados aceitos:</h2>
+<h2 class="text-center">Chamados aceitos:</h2>
 
 @if($chamadosAceitos->isEmpty())
 
-    <p>Você não tem nenhum chamado aceito.</p>
+    <h5 class="text-center">Você não tem nenhum chamado aceito.</h5>
 
 @else 
 
-    <table>
+    <table class="table">
         <thead>
             <tr>
-                <th>Titulo</th>
-                <th>Descricao</th>
-                <th>Ultima Atualização</th>
-                <th>Detalhes</th>
+                <th scope="col">Titulo</th>
+                <th scope="col">Descricao</th>
+                <th scope="col">Ultima Atualização</th>
+                <th scope="col">Detalhes</th>
             </tr>
         </thead>
         <tbody>

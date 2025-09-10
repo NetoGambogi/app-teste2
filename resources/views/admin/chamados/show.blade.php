@@ -2,7 +2,9 @@
 
 @section('content')
 
-    <h1 class="text-center">Chamado detalhado: </h1>
+<h1 class="text-center">Chamados</h1>
+
+    <h1 class="text-center mt-3">Chamado detalhado: </h1>
     <div class="d-flex justify-content-center">
         <ul class="list-group">
         <li class="list-group-item"><b>Id: </b> {{$chamado->id}}</li>
@@ -16,13 +18,15 @@
         </ul>
     </div>
 
-            <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary">Voltar</a>
-            <a href="{{ route('admin.chamados.edit', $chamado->id) }}" class="btn btn-info">Atualizar Status</a>
+    <div class="d-flex justify-content-center mt-3">    
+        <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary me-2">Voltar</a>
+        <a href="{{ route('admin.chamados.edit', $chamado->id) }}" class="btn btn-info me-2">Atualizar Status</a>
             
         <form action="{{ route('admin.chamados.destroy', $chamado->id) }}" method="POST" style="display:inline;">
         @csrf
         @method('DELETE')
         <button type="submit" class="btn btn-danger" onclick="return confirm('tem certeza que deseja apagar este chamado?')">Deletar</button>
+    </div>
 
     </form>
     </div>
