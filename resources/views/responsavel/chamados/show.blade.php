@@ -17,7 +17,7 @@
     </div>
 
     <div class="d-flex justify-content-center mt-3">
-            <a href="{{ route('responsavel.dashboard') }}" class="btn btn-secondary me-2">Voltar</a>
+            <a href="{{ route('responsavel.chamados.fila') }}" class="btn btn-secondary me-2">Voltar</a>
             <a href="{{ route('responsavel.chamados.edit', $chamado->id) }}" class="btn btn-info">Atualizar Status</a>
     </div>
 

@@ -33,7 +33,14 @@ class ResponsavelController extends Controller
         ->where('status', 'em_andamento')
         ->count();
 
-        return view('responsavel.dashboard');
+        return view('responsavel.dashboard', compact(
+        'responsavel',
+        'chamadosEmAndamento',
+        'chamadosRecentes',
+        'totalAceitos',
+        'totalConcluidos',
+        'totalEmAndamento'
+    ));
     }
 
     public function fila() {

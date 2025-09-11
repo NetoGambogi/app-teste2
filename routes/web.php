@@ -19,7 +19,7 @@ Route::get('/logout', function () {
 
         // Página inicial
 
-Route::get('home', [HomeController::class, 'index'])->name('home.index');
+Route::get('/inicio', [HomeController::class, 'index'])->name('inicio');
 
         // Rotas do requerente: 
 
