@@ -9,7 +9,7 @@
 
 <div class="d-flex justify-content-center">
 
-<div class="mb-3">
+<div class="mb-3 me-2">
     <label for="titulo" class="form-label">Título:</label>
     <input type="text" class="form-control" name="titulo" value="{{ old('titulo', $chamado->titulo) }}" required>
     <span class="text-danger">{{ $errors->first('titulo') }}</span>

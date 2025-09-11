@@ -109,6 +109,6 @@ class ResponsavelController extends Controller
 
         $chamado->save();
 
-        return redirect()->back()->with('message', 'Status atualizado com sucesso.');
+        return redirect()->route('responsavel.chamados.fila', $chamado)->with('message', 'Chamado atualizado com sucesso!');
     }
 }

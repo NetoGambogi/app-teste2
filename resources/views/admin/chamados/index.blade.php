@@ -32,5 +32,9 @@
     {{ $chamados->links('pagination::bootstrap-5') }}
 </div>
 
+    <div class="d-flex justify-content-center mt-3">    
+        <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary me-2">Voltar</a>
+    </div>
+
 
 @endsection

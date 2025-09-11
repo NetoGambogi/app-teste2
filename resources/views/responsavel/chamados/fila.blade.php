@@ -11,7 +11,7 @@
         <div class="col-md-6">
             <div class="card shadow-sm mb-4">
                 <div class="card-header bg-light">
-                    Chamados Abertos
+                    Chamados na fila
                 </div>
                 <div class="card-body p-0">
                     @if($chamadosAbertos->isEmpty())
@@ -53,7 +53,7 @@
         <div class="col-md-6">
             <div class="card shadow-sm mb-4">
                 <div class="card-header bg-light">
-                    Chamados Aceitos
+                    Chamados aceitos
                 </div>
                 <div class="card-body p-0">
                     @if($chamadosAceitos->isEmpty())
@@ -65,7 +65,7 @@
                                     <tr>
                                         <th>Título</th>
                                         <th>Descrição</th>
-                                        <th>Última Atualização</th>
+                                        <th>Última Att</th>
                                         <th>Detalhes</th>
                                     </tr>
                                 </thead>

@@ -2,10 +2,9 @@
 
 @section('content')
 
-<x-alertas />
-
-
 <h1 class="text-center">Lista de usuários</h1>
+
+<x-alertas />
 
 <div class="d-flex justify-content-center mt-2">
     <ul class="list-group w-50">

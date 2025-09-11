@@ -2,9 +2,10 @@
 
 @section('content')
 
-<h1 class="text-center">Chamados</h1>
-
     <h1 class="text-center mt-3">Chamado detalhado: </h1>
+
+<x-alertas />    
+
     <div class="d-flex justify-content-center">
         <ul class="list-group">
         <li class="list-group-item"><b>Id: </b> {{$chamado->id}}</li>

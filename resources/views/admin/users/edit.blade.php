@@ -4,20 +4,20 @@
 
 <x-alertas />
 
-<h1 class="text-center">Editar Cliente</h1>
+<h1 class="text-center mt-5">Editar Cliente</h1>
     <form action="{{route('admin.usuarios.update', $user->id )}}" method="POST">
         @csrf 
         @method('PUT')
 
-<div class="d-flex justify-content-center">
+<div class="d-flex justify-content-center mt-4">
 
-<div class="mb-3">
+<div class="mb-3 me-2">
     <label for="name" class="form-label">Nome:</label>
     <input type="text" class="form-control" name="name" value="{{ old('name', $user->name) }}" required>
     <span class="text-danger">{{ $errors->first('name') }}</span>
 </div>
 
-<div class="mb-3">
+<div class="mb-3 me-2">
     <label for="email" class="form-label">Email:</label>
     <input type="text" class="form-control" name="email" value="{{ old('email', $user->email) }}" required>
     <span class="text-danger">{{ $errors->first('email') }}</span>

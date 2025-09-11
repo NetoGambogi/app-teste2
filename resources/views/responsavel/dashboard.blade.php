@@ -11,27 +11,27 @@
 
     <div class="row mb-4">
         <div class="col-md-4">
-            <div class="card text-white bg-primary mb-3">
+            <div class="card mb-3">
                 <div class="card-body">
-                    <h5 class="card-title">Total Aceitos</h5>
+                    <h5 class="card-title text-primary">Total Aceitos</h5>
                     <p class="card-text display-6">{{ $totalAceitos }}</p>
                 </div>
             </div>
         </div>
 
         <div class="col-md-4">
-            <div class="card text-white bg-success mb-3">
+            <div class="card mb-3">
                 <div class="card-body">
-                    <h5 class="card-title">Total Concluidos:</h5>
+                    <h5 class="card-title text-success">Total Concluidos:</h5>
                     <p class="card-text display-6">{{ $totalConcluidos }}</p>
                 </div>
             </div>
         </div>
 
         <div class="col-md-4">
-            <div class="card text-white bg-warning mb-3">
+            <div class="card mb-3">
                 <div class="card-body">
-                    <h5 class="card-title">Em andamento:</h5>
+                    <h5 class="card-title text-warning">Em andamento:</h5>
                     <p class="card-text display-6">{{ $totalEmAndamento }}</p>
                 </div>
             </div>
@@ -41,7 +41,7 @@
     <div class="row mb-4">
         <div class="col-md-6">
             <div class="card shadow-sm">
-                <div class="card-header bg-warning text-dark">
+                <div class="card-header text-dark">
                     Chamados em Andamento
                 </div>
                 <ul class="list-group list-group-flush">
