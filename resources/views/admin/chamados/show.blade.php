@@ -8,7 +8,7 @@
 
     <div class="d-flex justify-content-center">
         <ul class="list-group">
-        <li class="list-group-item"><b>Id: </b> {{$chamado->id}}</li>
+        <li class="list-group-item"><b>Id: </b> {{$chamado->chamado_id}}</li>
         <li class="list-group-item"><b>Requerente: </b> {{$chamado->requerente?->name ?? 'Requerente apagado'}}</li>
         <li class="list-group-item"><b>Título: </b> {{$chamado->titulo}}</li>
         <li class="list-group-item"><b>Descrição: </b> {{$chamado->descricao}}</li>

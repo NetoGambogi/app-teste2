@@ -52,11 +52,16 @@ class AdminController extends Controller
 
     // Funções dos chamados 
 
-    public function chamados()
+    public function chamados(Request $request)
     {
-        $chamados = Chamado::all();
-        $chamados = Chamado::paginate(10)->withQueryString();
 
+     $query = Chamado::query();
+
+    if ($request->filled('chamado_id')) {
+        $query->where('chamado_id', 'ILIKE', '%' . $request->input('chamado_id') . '%');
+    }
+
+    $chamados = $query->paginate(10)->withQueryString();
 
         return view('admin.chamados.index', compact('chamados'));
     }

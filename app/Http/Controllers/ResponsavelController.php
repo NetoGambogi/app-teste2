@@ -87,6 +87,14 @@ class ResponsavelController extends Controller
 
     }
 
+    public function retornar(Chamado $chamado) 
+    {
+        $chamado->retornarFila();
+        return back()->with('message', 'chamado retornou para fila.');
+    }
+        
+    
+
     public function show(Chamado $chamado)
     {
         return view('responsavel.chamados.show', compact('chamado'));

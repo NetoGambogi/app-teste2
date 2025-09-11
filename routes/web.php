@@ -38,7 +38,8 @@ Route::middleware(['auth', 'role:responsavel,admin'])->prefix('responsavel')->na
         Route::get('/dashboard', [ResponsavelController::class, 'index'])->name('dashboard'); // Painel do responsavel
         Route::get('/chamados/fila', [ResponsavelController::class,'fila'])->name('chamados.fila'); // Exibe a fila de chamados em aberto
         Route::get('/chamados/{chamado}', [ResponsavelController::class, 'show'])->name('chamados.show'); // Mostra o chamado detalhadamente
-        Route::post('/chamados/{id}/aceitar', [ResponsavelController::class, 'aceitar'])->name('chamados.aceitar'); // Exibe o botão de aceitar chamado, automaticamente atualiza o status
+        Route::post('/chamados/{chamado}/aceitar', [ResponsavelController::class, 'aceitar'])->name('chamados.aceitar');
+        Route::post('/chamados/{chamado}/retornar', [ResponsavelController::class, 'retornar'])->name('chamados.retornar'); // Exibe o botão de aceitar chamado, automaticamente atualiza o status
         Route::get('/chamados/{chamado}/edit', [ResponsavelController::class, 'edit'])->name('chamados.edit'); // Exibe o formulário de edição de status
         Route::patch('/chamados/{chamado}/status', [ResponsavelController::class, 'updateStatus'])->name('chamados.updateStatus'); // Salva o chamado com status atualizado.
 });

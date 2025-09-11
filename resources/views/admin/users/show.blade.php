@@ -31,7 +31,7 @@
 @if ($chamado)
     <div class="d-flex justify-content-center">
     <ul class="list-group">
-        <li class="list-group-item"><b>ID: </b> {{$chamado->id}}</p>
+        <li class="list-group-item"><b>ID: </b> {{$chamado->chamado_id}}</p>
         <li class="list-group-item"><b>Ordem: </b> {{$chamado->titulo}}</p>
         <li class="list-group-item"><b>Descrição: </b> {{$chamado->descricao}}</p>
         <li class="list-group-item"><b>Status: </b> {{$chamado->status}}</p>

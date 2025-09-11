@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('chamado', function (Blueprint $table) {
             $table->id();
+            $table->string('chamado_id', 12)->nullable()->unique();
             $table->foreignId('requerente_id')->nullable()->references('id')->on('users')->onDelete('set null');
             $table->foreignId('responsavel_id')->nullable()->references('id')->on('users')->onDelete('set null');
             $table->string('titulo');

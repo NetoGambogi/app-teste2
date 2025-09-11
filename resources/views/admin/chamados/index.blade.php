@@ -4,11 +4,21 @@
 
 <h1 class="text-center">Chamados</h1>
 
+ <div class="d-flex justify-content-center">
+    <form action="{{ route('admin.chamados.index') }}">
+        <label for="">Busque um chamado por id:</label>
+        <input type="text" name="chamado_id" value="{{ request('chamado_id') }}">
+        <button type="submit" class="btn btn-info">Filtrar</button>
+    </form>
+</div>   
+
+
 <x-alertas />
 
 <table class="table">
   <thead>
     <tr>
+      <th scope="col">Id</th>
       <th scope="col">Título</th>
       <th scope="col">Requerente</th>
       <th scope="col">Status</th>
@@ -18,6 +28,7 @@
   </thead>
             @foreach($chamados as $chamado)
                 <tr>
+                    <td>{{ $chamado->chamado_id }}</td>
                     <td>{{ $chamado->titulo }}</td>
                     <td>{{$chamado->requerente?->name ?? 'Requerente apagado'}}</td>
                     <td>{{ ucfirst($chamado->status) }}</td>

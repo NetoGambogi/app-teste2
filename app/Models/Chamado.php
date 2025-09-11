@@ -15,8 +15,27 @@ class Chamado extends Model
     protected $table = 'chamado';
 
     protected $fillable = [
-        'requerente_id', 'responsavel_id', 'titulo', 'descricao', 'status', 'data_conclusao' 
+        'chamado_id', 'requerente_id', 'responsavel_id', 'titulo', 'descricao', 'status', 'data_conclusao' 
     ];
+
+    protected static function booted()
+    {
+        static::created(function ($chamado) {
+            $ano = date('y');
+            $mes = date('n');
+            $semestre = $mes <= 6 ? 'S1' : 'S2';
+
+            $chamado->chamado_id = 'C' . $ano . $semestre . '-' . $chamado->id;
+            $chamado->saveQuietly();
+        });
+    }
+
+    public function retornarFila()
+    {
+        $this->responsavel_id = null;
+        $this->status = 'aberta';
+        $this->save();
+    }
 
     public function user()
     {
