@@ -22,6 +22,7 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
+        'ativo',
         
     ];
 
@@ -48,8 +49,13 @@ class User extends Authenticatable
         ];
     }
 
-    public function isAdmin(): bool
+    public function scopeAtivos($query)
     {
-        return $this -> is_admin;
+        return $query->where('ativo', true);
+    }
+
+    public function scopesInativos($query)
+    {
+        return $query->where('ativo', false);
     }
 }

@@ -26,6 +26,12 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
 
+        $user = $request->user();
+        if (!$user->ativo) {
+            Auth::logout();
+            return back()->withErrors(['email' => 'Usuário inativo']);
+        }
+
         $request->session()->regenerate();
 
         $role = Auth::user()->role;
