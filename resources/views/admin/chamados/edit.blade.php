@@ -57,11 +57,7 @@
 
     <label for="status">Status:</label>
     <ul>
-        
-        <li><input type="radio" name="status" id="aberta" value="aberta"
-        {{ old('status', $chamado->status ?? '') === 'aberta' ? 'checked' : '' }}>
-            <label for="Aberta">Aberta</label></li>
-
+    
             <li><input type="radio" name="status" id="em_andamento" value="em_andamento"
         {{ old('status', $chamado->status ?? '') === 'em_andamento' ? 'checked' : '' }}>
             <label for="Em andamento">Em andamento</label></li>

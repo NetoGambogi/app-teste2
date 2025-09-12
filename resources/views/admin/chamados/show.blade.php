@@ -22,6 +22,13 @@
     <div class="d-flex justify-content-center mt-3">    
         <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary me-2">Voltar</a>
         <a href="{{ route('admin.chamados.edit', $chamado->id) }}" class="btn btn-info me-2">Atualizar Status</a>
+
+    @if ($chamado->status !== 'aberta')
+        <form action="{{ route('admin.chamados.retornar', $chamado->id) }}" method='POST'>
+        @csrf 
+        <button type="submit" class="btn btn-success me-2">Retornar a fila</button>
+        </form>
+    @endif
             
         <form action="{{ route('admin.chamados.destroy', $chamado->id) }}" method="POST" style="display:inline;">
         @csrf

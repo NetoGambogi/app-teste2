@@ -76,7 +76,7 @@
                                             <td>{{ $chamado->descricao }}</td>
                                             <td>{{ $chamado->updated_at->format('d/m/Y H:i') }}</td>
                                             <td>
-                                                    <form action="{{ route('responsavel.chamados.retornar', $chamado->id) }}" method='POST'>
+                                                <form action="{{ route('responsavel.chamados.retornar', $chamado->id) }}" method='POST'>
                                                     @csrf 
                                                     <button type="submit" class="btn btn-success btn-sm">Retornar a fila</button>
                                                 </form>

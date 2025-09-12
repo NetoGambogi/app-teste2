@@ -4,6 +4,9 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+use App\Models\Chamado;
+use App\Models\User;  
 
 class UserSeeder extends Seeder
 {
@@ -12,14 +15,21 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('users')->insert([
-            'name' => Str::random(20),
-            'email' => Str::random(20).'@example.com',
-            'password' => Hash::make('password'),
-            'role' => $roles[array_rand($roles)],
+
+        User::create([
+            'name' => 'Administrador',
+            'email' => 'admin@example.com',
+            'password' => Hash::make('senha123'),
+            'role' => 'admin',
             'ativo' => true,
-            'created_at' => now(),
-            'updated_at' => now(),
+        ]);
+
+        User::factory()->count(5)->create([
+            'role' => 'requerente',
+        ]);
+
+        User::factory()->count(5)->create([
+            'role' => 'responsavel',
         ]);
     }
 }

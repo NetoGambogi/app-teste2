@@ -79,17 +79,23 @@ class AdminController extends Controller
     return view('admin.chamados.edit', compact('chamado', 'requerentes', 'responsaveis'));
     }
 
-    public function updateChamado(UpdateChamadoRequest $request, Chamado $chamado) 
+        public function updateChamado(UpdateChamadoRequest $request, Chamado $chamado) 
     {
         $chamado->update($request->validated());
 
         return redirect()->route('admin.chamados.show', $chamado)->with('message', 'Chamado atualizado com sucesso!');
     }
 
-    public function destroyChamado(Chamado $chamado)
+        public function destroyChamado(Chamado $chamado)
     {
         $chamado->delete();
         return redirect()->route('admin.chamados.index')->with('message', 'Chamado excluído.');
+    }
+
+        public function retornar(Chamado $chamado) 
+    {
+        $chamado->retornarFila();
+        return back()->with('message', 'chamado retornou para fila.');
     }
 
 

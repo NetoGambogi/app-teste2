@@ -65,6 +65,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
         Route::get('/chamados/{chamado}/edit', [AdminController::class, 'editChamado'])->name('chamados.edit'); // exibe o formulario de edição de um chamado
         Route::put('/chamados/{chamado}', [AdminController::class, 'updateChamado'])->name('chamados.update'); // salva as informações atualizadas do chamado
         Route::delete('/chamados/{chamado}', [AdminController::class, 'destroyChamado'])->name('chamados.destroy'); // apaga um chamado
+        Route::post('/chamados/{chamado}/retornar', [AdminController::class, 'retornar'])->name('chamados.retornar'); // Exibe o botão de aceitar chamado, automaticamente atualiza o status
 
 });
 
