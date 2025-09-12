@@ -17,10 +17,6 @@ Route::get('/logout', function () {
     return redirect()->route('login');  // Botão para deslogar o usuário e retornar a tela de login
 })->name('logout');
 
-        // Página inicial
-
-Route::get('/inicio', [HomeController::class, 'index'])->name('inicio');
-
         // Rotas do requerente: 
 
 Route::middleware(['auth', 'role:requerente'])->prefix('requerente')->name('requerente.')->group(function () {
