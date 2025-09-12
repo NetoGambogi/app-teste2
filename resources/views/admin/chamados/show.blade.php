@@ -20,7 +20,7 @@
     </div>
 
     <div class="d-flex justify-content-center mt-3">    
-        <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary me-2">Voltar</a>
+        <a href="{{ route('admin.chamados.index') }}" class="btn btn-secondary me-2">Voltar</a>
         <a href="{{ route('admin.chamados.edit', $chamado->id) }}" class="btn btn-info me-2">Atualizar Status</a>
 
     @if ($chamado->status !== 'aberta')

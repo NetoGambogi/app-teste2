@@ -20,10 +20,10 @@ class ResponsavelController extends Controller
 
         $chamadosRecentes = Chamado::where('responsavel_id', $responsavel->id)
         ->orderBy('updated_at')
-        ->limit(5)
-        ->get();
+        ->paginate(5);
 
-        $totalAceitos = Chamado::where('responsavel_id', $responsavel->id)->count();
+        $chamadosFila = Chamado::where('status', 'aberta')
+        ->count();
 
         $totalConcluidos = Chamado::where('responsavel_id', $responsavel->id)
         ->where('status', 'concluida')
@@ -37,9 +37,9 @@ class ResponsavelController extends Controller
         'responsavel',
         'chamadosEmAndamento',
         'chamadosRecentes',
-        'totalAceitos',
         'totalConcluidos',
-        'totalEmAndamento'
+        'totalEmAndamento',
+        'chamadosFila'
     ));
     }
 

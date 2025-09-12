@@ -13,8 +13,8 @@
         <div class="col-md-4">
             <div class="card mb-3">
                 <div class="card-body">
-                    <h5 class="card-title text-primary">Total Aceitos</h5>
-                    <p class="card-text display-6">{{ $totalAceitos }}</p>
+                    <h5 class="card-title text-primary">Chamados na fila</h5>
+                    <p class="card-text display-6">{{ $chamadosFila }}</p>
                 </div>
             </div>
         </div>
@@ -46,8 +46,8 @@
                 </div>
                 <ul class="list-group list-group-flush">
                     @forelse($chamadosEmAndamento as $chamado)
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span>{{ $chamado->titulo }}</span>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>{{ $chamado->chamado_id}} - <strong> {{ $chamado->titulo }} </strong></span>
                             <span class="badge bg-warning text-dark">{{ $chamado->status }}</span>
                         </li>
                     @empty
@@ -66,8 +66,8 @@
                     @forelse($chamadosRecentes as $chamado)
                         <li class="list-group-item">
                             <div class="d-flex justify-content-between">
-                                <div>
-                                    <strong>{{ $chamado->titulo }}</strong><br>
+                                <div>                        
+                                    <span>{{ $chamado->chamado_id }} - <strong> {{ $chamado->titulo }}</strong></span><br>
                                     <small class="text-muted">Atualizado em {{ $chamado->updated_at->format('d/m/Y H:i') }}</small>
                                 </div>
                                 <span class="badge bg-secondary">{{ $chamado->status }}</span>
@@ -77,6 +77,9 @@
                         <li class="list-group-item">Nenhum chamado recente.</li>
                     @endforelse
                 </ul>
+                    <div class="d-flex justify-content-center mt-3">
+                        {{ $chamadosRecentes->links('pagination::bootstrap-5') }}
+                    </div>
             </div>
         </div>
     </div>

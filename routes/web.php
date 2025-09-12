@@ -57,7 +57,8 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
         Route::get('/usuarios/{user}', [AdminController::class, 'show'])->name('usuarios.show'); // mostra os detalhes do usuario
         Route::get('/usuarios/{user}/edit', [AdminController::class, 'edit'])->name('usuarios.edit'); // exibe o formulario de edição do usuario
         Route::put('/usuarios/{user}', [AdminController::class, 'update'])->name('usuarios.update'); // salva as informações do usuário atualizadas
-        Route::delete('/usuarios/{user}', [AdminController::class, 'destroy'])->name('usuarios.destroy'); // apaga um usuario
+        Route::patch('/usuarios/{user}/desativar', [AdminController::class, 'desativar'])->name('usuarios.desativar'); // desativa um usuario
+        Route::patch('/usuarios/{user}/ativar', [AdminController::class, 'ativar'])->name('usuarios.ativar'); // ativa um usuario
 
         // Controle dos chamados
         Route::get('/chamados', [AdminController::class, 'chamados'])->name('chamados.index');

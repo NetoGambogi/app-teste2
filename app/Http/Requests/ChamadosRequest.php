@@ -22,8 +22,8 @@ class ChamadosRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'titulo' => ['required', 'min:3',],
-            'descricao' => ['required',],
+            'titulo' => ['required', 'min:3', 'max:16'],
+            'descricao' => ['required', 'max:64'],
         ];
     }
 
@@ -35,8 +35,10 @@ public function messages(): array
 
         'titulo.required' => 'O campo título é obrigatório.',
         'titulo.min' => 'O título deve ter no mínimo :min caracteres.',
+        'titulo.max' => 'O título deve ter no máximo :max caracteres.',
 
         'descricao.required' => 'A descrição é obrigatória.',
+        'descricao.max' => 'A descrição pode ter no máximo :max caracteres.',
 
         'status.required' => 'O campo status é obrigatório.',
         'status.in' => 'Por favor, selecione um status válido (Aberta, Em Andamento ou Concluída).',

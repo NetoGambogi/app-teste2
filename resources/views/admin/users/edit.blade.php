@@ -4,7 +4,7 @@
 
 <x-alertas />
 
-<h1 class="text-center mt-5">Editar Cliente</h1>
+<h1 class="text-center mt-5">Editar usuário</h1>
     <form action="{{route('admin.usuarios.update', $user->id )}}" method="POST">
         @csrf 
         @method('PUT')
@@ -25,7 +25,7 @@
 
 <!-- Precisa deixar pre-definido o valor antigo -->
 
-    <label for="role">Cargo:</label>
+    <label for="role">Tipo de usuário:</label>
     <ul>
         <li><input type="radio" name="role" id="requerente" value="requerente"
         {{ old('', $user->role ?? '') === 'requerente' ? 'checked' : '' }}>

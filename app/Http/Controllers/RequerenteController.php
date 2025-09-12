@@ -15,15 +15,42 @@ class RequerenteController extends Controller
 {
     use AuthorizesRequests;
 
-    public function index(): View
-    {
-        $userId = Auth::id();
+    public function index(Request $request): View
+    {   
+        $requerente = auth()->user();
 
-        $chamados = Chamado::where('requerente_id', $userId)
-            ->latest()
-            ->paginate(10);
+        $query = Chamado::where('requerente_id', $requerente->id);
+
+        if ($request->filled('chamado_id')) {
+            $query->where('chamado_id', 'ILIKE', '%' . $request->input('chamado_id') . '%');
+        }
+
+        $chamados = $query->latest()->paginate(5)->withQueryString();
+
+
+        $chamadosRealizados = Chamado::where('requerente_id', $requerente->id)
+        ->count();
+
+        $chamadosEmAndamento = Chamado::where('requerente_id', $requerente->id)
+        ->where('status', 'em_andamento')
+        ->count();
+
+        $chamadosConcluidos = Chamado::where('requerente_id', $requerente->id)
+        ->where('status', 'concluida')
+        ->count();
+
+        $chamadosNaFila = Chamado::where('requerente_id', $requerente->id)
+        ->where('status', 'aberta')
+        ->count();
         
-        return view('requerente.dashboard', compact('chamados'));
+        return view('requerente.dashboard', compact('chamados',
+        'requerente',
+        'chamadosRealizados',
+        'chamadosEmAndamento',
+        'chamadosNaFila',
+        'chamadosConcluidos',
+        'chamados'
+    ));
     }
 
     public function create() 

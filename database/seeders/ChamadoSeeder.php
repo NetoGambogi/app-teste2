@@ -20,8 +20,8 @@ class ChamadoSeeder extends Seeder
         $requerentes = User::where('role', 'requerente')->pluck('id')->toArray();
         $responsaveis = User::where('role', 'responsavel')->pluck('id')->toArray();
 
-        // cria 10 chamados
-        for ($i = 1; $i <= 10; $i++) {
+        // cria 20 chamados
+        for ($i = 1; $i <= 20; $i++) {
             Chamado::create([
                 'requerente_id' => $requerentes ? $requerentes[array_rand($requerentes)] : null,
                 'responsavel_id' => $responsaveis ? $responsaveis[array_rand($responsaveis)] : null,

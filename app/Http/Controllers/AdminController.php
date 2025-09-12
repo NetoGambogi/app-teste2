@@ -19,17 +19,41 @@ class AdminController extends Controller
 
     public function index(Request $request)
     {
-        $users = User::where('role', '!=', 'admin')->get();
-        return view('admin.users.index', compact('users'));
+
+    $query = User::where('role', '!=', 'admin');
+
+    if ($request->filled('name')) {
+        $query->where('name', 'ILIKE', '%' . $request->input('name') . '%');
     }
 
-        public function show(User $user, Chamado $chamado)
+    if ($request->filled('role')) {
+        $query->where('role', $request->input('role'));
+    }
+
+    $usersCadastrados = User::count();
+
+    $usersRequerentes = User::where('role', 'requerente')
+    ->count();
+
+    $usersResponsaveis = User::where('role', 'responsavel')
+    ->count();
+
+    $users = $query->paginate(8)->withQueryString();
+
+        return view('admin.users.index', compact('users',
+    'usersCadastrados',
+    'usersRequerentes',
+    'usersResponsaveis'));
+    }
+
+    public function show(User $user, Chamado $chamado)
     {
 
     $chamado = Chamado::where('responsavel_id', $user->id)
     ->orWhere('requerente_id', $user->id)
     ->latest()->first();
-    return view('admin.users.show', compact('user','chamado'));
+
+        return view('admin.users.show', compact('user','chamado'));
     }
 
     public function edit(User $user)
@@ -43,10 +67,22 @@ class AdminController extends Controller
         return redirect()->route('admin.usuarios.show', $user)->with('message', 'Usuário atualizado com sucesso.');
     }
 
-    public function destroy(User $user)
+    public function desativar(User $user)
     {
-        $user->delete();
-        return redirect()->route('admin.usuarios.index')->with('message', 'Usuário excluido com sucesso');
+        if ($user -> role !== 'admin') {
+            $user -> ativo = false;
+            $user -> save();
+        }
+        return redirect()->back()->with('message', 'Usuário desativado com sucesso');
+    }
+
+    public function ativar(User $user)
+    {
+        if ($user -> role !== 'admin') {
+            $user -> ativo = true;
+            $user -> save();
+        }
+        return redirect()->back()->with('message', 'Usuário reativado com sucesso.');
     }
 
 
@@ -55,15 +91,30 @@ class AdminController extends Controller
     public function chamados(Request $request)
     {
 
-     $query = Chamado::query();
+    $query = Chamado::query();
 
     if ($request->filled('chamado_id')) {
         $query->where('chamado_id', 'ILIKE', '%' . $request->input('chamado_id') . '%');
     }
 
-    $chamados = $query->paginate(10)->withQueryString();
+    if ($request->filled('status')) {
+        $query->where('status', $request->input('status'));
+    }
 
-        return view('admin.chamados.index', compact('chamados'));
+    $totalChamados = Chamado::count();
+
+    $chamadosFila = Chamado::where('status', 'aberta')
+    ->count();
+
+    $chamadosConcluido = Chamado::where('status', 'concluida')
+    ->count();
+
+    $chamados = $query->paginate(8)->withQueryString();
+
+        return view('admin.chamados.index', compact('chamados',
+    'totalChamados',
+    'chamadosFila',
+    'chamadosConcluido',));
     }
 
     public function showChamado(Chamado $chamado)

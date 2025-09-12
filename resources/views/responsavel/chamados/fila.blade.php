@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container mt-4">
-    <h1 class="text-center mb-4">Fila de chamados</h1>
+    <h1 class="text-center mb-4">Fila e chamados aceitos</h1>
 
     <x-alertas />
 
@@ -21,6 +21,7 @@
                             <table class="table table-striped mb-0">
                                 <thead>
                                     <tr>
+                                        <th>Id</th>
                                         <th>Título</th>
                                         <th>Descrição</th>
                                         <th>Criado em</th>
@@ -30,8 +31,9 @@
                                 <tbody>
                                     @foreach($chamadosAbertos as $chamado)
                                         <tr>
+                                            <td >{{ $chamado->chamado_id }}</td>
                                             <td>{{ $chamado->titulo }}</td>
-                                            <td>{{ $chamado->descricao }}</td>
+                                            <td class="text-break">{{ $chamado->descricao }}</td>
                                             <td>{{ $chamado->created_at->format('d/m/Y H:i') }}</td>
                                             <td>
                                                 <form action="{{ route('responsavel.chamados.aceitar', $chamado->id) }}" method='POST'>
@@ -63,6 +65,7 @@
                             <table class="table table-striped mb-0">
                                 <thead>
                                     <tr>
+                                        <th>Id</th>
                                         <th>Título</th>
                                         <th>Descrição</th>
                                         <th>Última Att</th>
@@ -72,15 +75,16 @@
                                 <tbody>
                                     @foreach($chamadosAceitos as $chamado)
                                         <tr>
+                                            <td>{{ $chamado->chamado_id }}</td>
                                             <td>{{ $chamado->titulo }}</td>
-                                            <td>{{ $chamado->descricao }}</td>
+                                            <td class="text-break">{{ $chamado->descricao }}</td>
                                             <td>{{ $chamado->updated_at->format('d/m/Y H:i') }}</td>
                                             <td>
+                                                <a href="{{ route('responsavel.chamados.show', $chamado->id) }}" class="btn btn-primary btn-sm">Detalhes</a>                                               
                                                 <form action="{{ route('responsavel.chamados.retornar', $chamado->id) }}" method='POST'>
                                                     @csrf 
-                                                    <button type="submit" class="btn btn-success btn-sm">Retornar a fila</button>
+                                                    <button type="submit" class="btn btn-success btn-sm  mt-1">Voltar a fila</button>
                                                 </form>
-                                                <a href="{{ route('responsavel.chamados.show', $chamado->id) }}" class="btn btn-primary btn-sm">Detalhes</a>
                                             </td>
                                         </tr>
                                     @endforeach
