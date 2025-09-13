@@ -63,10 +63,25 @@ class RequerenteController extends Controller
         // 1. Pegue os dados validados do formulário 
         $dadosValidados = $request->validated();
 
-        // 2. CRIE UM NOVO ARRAY combinando os dados validados com os dados do sistema
+        $imageName = null;
+
+                // Upload de imagem
+
+
+    if ($request->hasFile('image') && $request->file('image')->isValid()) {
+        $requestImage = $request->file('image');
+        $extension = $requestImage->extension();
+
+        $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
+
+        // move antes de criar o registro
+        $requestImage->move(public_path("img/ocorridos/requerente"), $imageName);
+    }
+
         $dadosParaSalvar = array_merge($dadosValidados, [
-            'requerente_id' => Auth::id(), // Adiciona o ID do usuário logado
-            'status' => 'aberta',         // Define o status inicial como 'aberto'
+            'requerente_id' => Auth::id(),
+            'status' => 'aberta',
+            'image' => $imageName, // já vai com nome ou null
         ]);
 
         // 3. Use o array COMPLETO para criar o chamado

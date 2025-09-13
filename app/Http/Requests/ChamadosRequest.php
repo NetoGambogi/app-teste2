@@ -24,15 +24,13 @@ class ChamadosRequest extends FormRequest
         return [
             'titulo' => ['required', 'min:3', 'max:16'],
             'descricao' => ['required', 'max:64'],
+            'image' => ['nullable', 'mimes:jpg,jpeg,png', 'max:2064']
         ];
     }
 
 public function messages(): array
     {
         return [
-        'requerente_id.required' => 'Você precisa selecionar o requerente do chamado.',
-        'requerente_id.exists' => 'O requerente selecionado não existe ou é inválido.',
-
         'titulo.required' => 'O campo título é obrigatório.',
         'titulo.min' => 'O título deve ter no mínimo :min caracteres.',
         'titulo.max' => 'O título deve ter no máximo :max caracteres.',
@@ -40,10 +38,9 @@ public function messages(): array
         'descricao.required' => 'A descrição é obrigatória.',
         'descricao.max' => 'A descrição pode ter no máximo :max caracteres.',
 
-        'status.required' => 'O campo status é obrigatório.',
-        'status.in' => 'Por favor, selecione um status válido (Aberta, Em Andamento ou Concluída).',
+        'image.mimes' => 'Formato incompatível.',
+        'image.max' => 'Seu arquivo é muito grande. Limite de 2 MB.',
 
-        'data_conclusao.date' => 'O campo data de conclusão deve conter uma data válida.',
         ];
     }
 }

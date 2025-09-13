@@ -16,6 +16,17 @@
         </ul>
     </div>
 
+    <div>
+        <div class="images">
+            @if($chamado->image)
+                <p>Anexos:</p>
+                <img src="{{ asset('img/ocorridos/requerente/' . $chamado->image) }}" alt="imagem">
+            @else 
+                <p>Esse chamado não tem anexos.</p>
+            @endif
+        </div>
+    </div>
+
     <div class="d-flex justify-content-center mt-3">
 
         <a href="{{ route('requerente.chamados.edit', $chamado->id) }}" class="btn btn-info btn-primary me-2">Atualizar</a>

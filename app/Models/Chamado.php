@@ -15,7 +15,7 @@ class Chamado extends Model
     protected $table = 'chamado';
 
     protected $fillable = [
-        'chamado_id', 'requerente_id', 'responsavel_id', 'titulo', 'descricao', 'status', 'data_conclusao' 
+        'chamado_id', 'requerente_id', 'responsavel_id', 'titulo', 'descricao', 'status', 'data_conclusao', 'image', 
     ];
 
     protected static function booted()
@@ -27,6 +27,12 @@ class Chamado extends Model
 
             $chamado->chamado_id = 'C' . $ano . $semestre . '-' . $chamado->id;
             $chamado->saveQuietly();
+        });
+
+        static::deleting(function ($chamado) {
+            if ($chamado->image && file_exists(public_path('img/ocorridos/requerente' . $chamado->image))) {
+                unlink(public_path('img/ocorridos/requerente' . $chamado->image));
+            }
         });
     }
 
