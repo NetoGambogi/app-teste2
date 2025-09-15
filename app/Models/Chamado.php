@@ -30,9 +30,7 @@ class Chamado extends Model
         });
 
         static::deleting(function ($chamado) {
-            if ($chamado->image && file_exists(public_path('img/ocorridos/requerente' . $chamado->image))) {
-                unlink(public_path('img/ocorridos/requerente' . $chamado->image));
-            }
+            $chamado->imagens()->forceDelete();
         });
     }
 
@@ -55,4 +53,10 @@ class Chamado extends Model
     public function responsavel(): BelongsTo {
         return $this->belongsTo(User::class, 'responsavel_id');
     }
+
+    public function imagens()
+    {
+        return $this->hasMany(ImagemChamado::class, 'chamado_id');
+    }
+
 }

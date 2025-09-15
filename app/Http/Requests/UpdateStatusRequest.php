@@ -22,7 +22,8 @@ class UpdateStatusRequest extends FormRequest
     public function rules(): array
     {
         return [
-           'status' => ['required', 'in:aberta,em_andamento,concluida,cancelada'],
+            'status' => ['required', 'in:aberta,em_andamento,concluida,cancelada'],
+            'image.*' => ['nullable', 'mimes:jpg,jpeg,png', 'max:2064'],
         ];
     }
 
@@ -30,6 +31,9 @@ class UpdateStatusRequest extends FormRequest
     {
         return [
         'status.required' => 'O campo status é obrigatório.',
+
+        'image.*.mimes' => 'Formato incompatível.',
+        'image.*.max' => 'Seu arquivo é muito grande. Limite de 2 MB.',
         ];
     }
 }

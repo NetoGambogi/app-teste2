@@ -15,18 +15,29 @@
         <li class="list-group-item"><b>Atualizado em: </b> {{ $chamado->updated_at->format('d/m/Y H:i') }}</li>
         </ul>
 
-    @if($chamado->image)
-        <div class="text-center mt-3">
-            <img src="{{ asset('/img/ocorridos/requerente/' . $chamado->image) }}" alt="Imagem do chamado" class="img-fluid rounded">
-        </div>
-    @endif
+    </div>
 
+    <div class="d-flex justify-content-center">
+        <div class="images">
+            @if($chamado->imagens->count())
+                <p>Anexos:</p>
+                <div class="d-flex flex-wrap">
+                    @foreach($chamado->imagens as $imagem)
+                        <img src="{{ asset('storage/img/ocorridos/requerente/' . $imagem->nome_img) }}" 
+                            alt="imagem"
+                            style="width: 150px; height: auto; margin-right: 5px;">
+                    @endforeach 
+                </div>     
+            @else 
+                <p>Esse chamado não tem anexos.</p>
+            @endif
+        </div>
     </div>
 
 <!-- Atualizar chamado -->
 
 <div class="d-flex justify-content-center mt-3">
-    <form action="{{route('responsavel.chamados.updateStatus', $chamado->id )}}" method="POST">
+    <form action="{{route('responsavel.chamados.updateStatus', $chamado->id )}}" method="POST" enctype="multipart/form-data">
         @csrf 
         @method('PATCH')
 
@@ -41,6 +52,15 @@
             <label for="Cancelada">Cancelada</label>
 
             <span class="text-danger">{{ $errors->first('status') }}</span>
+        
+        <div class="mb-3 mt-2">
+                <input type="file" id="image" name="image[]" multiple class="form-control">
+
+            <label for="image" class="form-label">Imagem do ocorrido 
+                <small>(Formatos: jpg, jpeg, png - Tamanho maximo: 2mb)</small>
+            </label>
+                <span class="text-danger">{{ $errors->first('image.*') }}</span>
+        </div>
 
 <div class="d-flex justify-content-center mt-3">
     <button type=submit class="btn btn-success btn-success me-2">Atualizar Status</button>

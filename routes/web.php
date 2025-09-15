@@ -7,6 +7,8 @@ use App\Http\Controllers\ResponsavelController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ImagemChamadoController;
+
 
 Route::get('/', function () {
     return redirect()->route('login');

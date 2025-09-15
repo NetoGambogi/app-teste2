@@ -24,7 +24,7 @@ class ChamadosRequest extends FormRequest
         return [
             'titulo' => ['required', 'min:3', 'max:16'],
             'descricao' => ['required', 'max:64'],
-            'image' => ['nullable', 'mimes:jpg,jpeg,png', 'max:2064']
+            'image.*' => ['nullable', 'mimes:jpg,jpeg,png', 'max:2064']
         ];
     }
 
@@ -38,8 +38,8 @@ public function messages(): array
         'descricao.required' => 'A descrição é obrigatória.',
         'descricao.max' => 'A descrição pode ter no máximo :max caracteres.',
 
-        'image.mimes' => 'Formato incompatível.',
-        'image.max' => 'Seu arquivo é muito grande. Limite de 2 MB.',
+        'image.*.mimes' => 'Formato incompatível.',
+        'image.*.max' => 'Seu arquivo é muito grande. Limite de 2 MB.',
         ];
     }
 }

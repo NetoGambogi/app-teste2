@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('chamado', function (Blueprint $table) {
-            $table->string('image')->nullable();
+        Schema::table('imagens_chamado', function (Blueprint $table) {
+            $table->string('tipo')->default('abertura');
         });
     }
 
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('chamado', function (Blueprint $table) {
-            $table->dropColumn('image');
+        Schema::table('imagens_chamado', function (Blueprint $table) {
+            $table->dropColumn('tipo');
         });
     }
 };

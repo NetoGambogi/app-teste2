@@ -139,7 +139,8 @@ class AdminController extends Controller
 
         public function destroyChamado(Chamado $chamado)
     {
-        $chamado->delete();
+        $chamado->forceDelete();
+
         return redirect()->route('admin.chamados.index')->with('message', 'Chamado excluído.');
     }
 

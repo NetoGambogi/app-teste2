@@ -16,11 +16,17 @@
         </ul>
     </div>
 
-    <div>
+    <div class="d-flex justify-content-center">
         <div class="images">
-            @if($chamado->image)
+            @if($chamado->imagens->count())
                 <p>Anexos:</p>
-                <img src="{{ asset('img/ocorridos/requerente/' . $chamado->image) }}" alt="imagem">
+                <div class="d-flex flex-wrap">
+                    @foreach($chamado->imagens as $imagem)
+                        <img src="{{ asset('storage/img/ocorridos/requerente/' . $imagem->nome_img) }}" 
+                            alt="imagem"
+                            style="width: 150px; height: auto; margin-right: 5px;">
+                    @endforeach 
+                </div>     
             @else 
                 <p>Esse chamado não tem anexos.</p>
             @endif

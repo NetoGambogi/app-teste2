@@ -15,19 +15,24 @@
                 <span class="text-danger">{{ $errors->first('titulo') }}</span>
         </div>
 
-        <div class="mb-3">
+        <div class="mb-3 me-2">
                 <label for="descricao">Descrição</label>
                 <textarea class="form-control" placeholder="Descreva seu problema" id="descricao" name="descricao">{{ old('descricao') }}</textarea>
                 <span class="text-danger">{{ $errors->first('descricao') }}</span>
         </div>
 
-        <div class="mb-3 me-2">
-                <label for="image" class="form-label">Imagem do ocorrido</label>
-                <input type="file" id="image" name="image" class="form-control-file">
-                <span class="text-danger">{{ $errors->first('image') }}</span>
         </div>
 
+<div class="d-flex justify-content-center mt-4">
+        <div class="mb-3">
+                <label for="image" class="form-label">Imagem do ocorrido 
+                        <small>(Formatos: jpg, jpeg, png - Tamanho maximo: 2mb)</small>
+                </label>
+
+                <input type="file" id="image" name="image[]" multiple class="form-control">
+                <span class="text-danger">{{ $errors->first('image.*') }}</span>
         </div>
+</div>
 
     <div class="d-flex justify-content-center mt-3">
             <button type="submit" class="btn btn-success me-3">Enviar Chamado</button>

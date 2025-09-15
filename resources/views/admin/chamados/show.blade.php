@@ -19,11 +19,41 @@
         </ul>
     </div>
 
+    <div class="d-flex justify-content-center">
+        <div class="images">
+            <p>Anexos do requerente:</p>
+                @if($chamado->imagens->where('tipo', 'abertura')->count())
+                    <div class="d-flex flex-wrap">
+                        @foreach($chamado->imagens->where('tipo', 'abertura') as $imagem)
+                            <img src="{{ asset('storage/img/ocorridos/requerente/' . $imagem->nome_img) }}" 
+                                alt="imagem"
+                                style="width: 150px; height: auto; margin-right: 5px;">
+                        @endforeach 
+                    </div>     
+            @endif
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-center">
+        <div class="images">
+            <p>Anexos do responsavel:</p>
+                @if($chamado->imagens->where('tipo', 'conclusao')->count())
+                    <div class="d-flex flex-wrap">
+                        @foreach($chamado->imagens->where('tipo', 'conclusao') as $imagem)
+                            <img src="{{ asset('storage/img/ocorridos/responsavel/' . $imagem->nome_img) }}" 
+                                alt="imagem"
+                                style="width: 150px; height: auto; margin-right: 5px;">
+                        @endforeach 
+                    </div>     
+            @endif
+        </div>
+    </div>
+
     <div class="d-flex justify-content-center mt-3">    
         <a href="{{ route('admin.chamados.index') }}" class="btn btn-secondary me-2">Voltar</a>
         <a href="{{ route('admin.chamados.edit', $chamado->id) }}" class="btn btn-info me-2">Atualizar Status</a>
 
-    @if ($chamado->status !== 'aberta')
+    @if ($chamado->status !== 'aberta' && $chamado->status !== 'concluida')
         <form action="{{ route('admin.chamados.retornar', $chamado->id) }}" method='POST'>
         @csrf 
         <button type="submit" class="btn btn-success me-2">Retornar a fila</button>

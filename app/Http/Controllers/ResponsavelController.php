@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Chamado;
 use App\Models\User;
+use App\Models\ImagemChamado;
 use Illuminate\Http\Request;
 use App\Http\Requests\ChamadosRequest;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\UpdateStatusRequest;
 
 class ResponsavelController extends Controller
@@ -97,6 +99,9 @@ class ResponsavelController extends Controller
 
     public function show(Chamado $chamado)
     {
+        
+        $chamado->load('imagens');
+
         return view('responsavel.chamados.show', compact('chamado'));
     }
 
@@ -116,6 +121,23 @@ class ResponsavelController extends Controller
         }
 
         $chamado->save();
+
+            if ($request->hasFile('image')) {
+        foreach ($request->file('image') as $arquivo) {
+            if ($arquivo->isValid()) {
+                $nome = md5($arquivo->getClientOriginalName() . time()) . '.' . $arquivo->extension();
+                $arquivo->storeAs('img/ocorridos/responsavel', $nome, 'public');
+
+                // 4. Cria registro na tabela img_chamado
+                ImagemChamado::create([
+                    'chamado_id' => $chamado->id,
+                    'nome_img' => $nome,
+                    'uploaded_by' => Auth::id(),
+                    'tipo' => 'conclusao',
+                ]);
+            }
+        }
+    }
 
         return redirect()->route('responsavel.chamados.fila', $chamado)->with('message', 'Chamado atualizado com sucesso!');
     }
