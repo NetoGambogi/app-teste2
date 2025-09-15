@@ -22,9 +22,9 @@
         </div>
 
         <div class="mb-3 me-2">
-                <label for="titulo" class="form-label">Imagem do ocorrido</label>
+                <label for="image" class="form-label">Imagem do ocorrido</label>
                 <input type="file" id="image" name="image" class="form-control-file">
-                <span class="text-danger">{{ $errors->first('titulo') }}</span>
+                <span class="text-danger">{{ $errors->first('image') }}</span>
         </div>
 
         </div>

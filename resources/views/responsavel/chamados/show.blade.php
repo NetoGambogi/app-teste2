@@ -14,6 +14,13 @@
         <li class="list-group-item"><b>Criado em: </b> {{ $chamado->created_at->format('d/m/Y H:i') }}</li>
         <li class="list-group-item"><b>Atualizado em: </b> {{ $chamado->updated_at->format('d/m/Y H:i') }}</li>
         </ul>
+
+    @if($chamado->image)
+        <div class="text-center mt-3">
+            <img src="{{ asset('/img/ocorridos/requerente/' . $chamado->image) }}" alt="Imagem do chamado" class="img-fluid rounded">
+        </div>
+    @endif
+
     </div>
 
 <!-- Atualizar chamado -->

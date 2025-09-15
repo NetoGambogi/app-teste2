@@ -40,7 +40,6 @@ public function messages(): array
 
         'image.mimes' => 'Formato incompatível.',
         'image.max' => 'Seu arquivo é muito grande. Limite de 2 MB.',
-
         ];
     }
 }
