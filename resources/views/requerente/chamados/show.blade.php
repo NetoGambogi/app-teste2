@@ -25,12 +25,15 @@
 
         <a href="{{ route('requerente.chamados.edit', $chamado->id) }}" class="btn btn-info btn-primary me-2">Atualizar</a>
 
+
+    @if ($chamado->status === 'aberta')
     <form action="{{ route('requerente.chamados.destroy', $chamado->id) }}" method="POST">
         @csrf
         @method('DELETE')
         <button type="submit" class="btn btn-danger me-2" onclick="return confirm('tem certeza que deseja apagar esta ordem?')">Deletar</button>
     </form>
-
+    @endif
+    
         <a href="{{ route('requerente.dashboard') }}" class="btn btn-secondary">Voltar</a>
 
     </div>
