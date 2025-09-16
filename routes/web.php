@@ -19,6 +19,8 @@ Route::get('/logout', function () {
     return redirect()->route('login');  // Botão para deslogar o usuário e retornar a tela de login
 })->name('logout');
 
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+
         // Rotas do requerente: 
 
 Route::middleware(['auth', 'role:requerente'])->prefix('requerente')->name('requerente.')->group(function () {
@@ -29,6 +31,10 @@ Route::middleware(['auth', 'role:requerente'])->prefix('requerente')->name('requ
         Route::get('/chamados/{chamado}/edit', [RequerenteController::class, 'edit'])->name('chamados.edit'); // Exibe o formulário para atualizar chamados
         Route::put('/chamados/{chamado}', [RequerenteController::class, 'update'])->name('chamados.update');  // Salva o chamado atualizado
         Route::delete('/chamados/{chamado}', [RequerenteController::class, 'destroy'])->name('chamados.destroy'); // Apaga um chamado
+
+        Route::delete('/imagens/{imagem}', [ImagemChamadoController::class, 'destroy'])->name('imagens.destroy');
+        Route::post('/imagens/{imagem}/replace', [ImagemChamadoController::class, 'replace'])->name('imagens.replace');
+        Route::post('/chamados/{chamado}/imagens', [ImagemChamadoController::class, 'store'])->name('imagens.store');
 });
 
         // Rotas do responsável

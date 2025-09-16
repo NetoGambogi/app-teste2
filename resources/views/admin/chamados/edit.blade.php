@@ -4,7 +4,7 @@
 
 <x-alertas />
 
-    <h1 class="text-center">Editar ordem</h1>
+    <h1 class="text-center">Editar chamado</h1>
     <form action="{{route('admin.chamados.update', $chamado->id )}}" method="POST">
         @csrf 
         @method('PUT')

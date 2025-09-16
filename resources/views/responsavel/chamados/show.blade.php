@@ -17,24 +17,12 @@
 
     </div>
 
-    <div class="d-flex justify-content-center">
-        <div class="images">
-            @if($chamado->imagens->count())
-                <p>Anexos:</p>
-                <div class="d-flex flex-wrap">
-                    @foreach($chamado->imagens as $imagem)
-                        <img src="{{ asset('storage/img/ocorridos/requerente/' . $imagem->nome_img) }}" 
-                            alt="imagem"
-                            style="width: 150px; height: auto; margin-right: 5px;">
-                    @endforeach 
-                </div>     
-            @else 
-                <p>Esse chamado não tem anexos.</p>
-            @endif
-        </div>
-    </div>
+<x-chamado-imagem :chamado="$chamado" /> <!-- Mostrar a imagem do requerente do chamado -->
+
 
 <!-- Atualizar chamado -->
+
+<h3 class="text-center mt-3">Finalização do chamado</h3>
 
 <div class="d-flex justify-content-center mt-3">
     <form action="{{route('responsavel.chamados.updateStatus', $chamado->id )}}" method="POST" enctype="multipart/form-data">
@@ -54,16 +42,15 @@
             <span class="text-danger">{{ $errors->first('status') }}</span>
         
         <div class="mb-3 mt-2">
+                <label for="image" class="form-label">Imagem do ocorrido 
+                    <small>(Formatos: jpg, jpeg, png - Tamanho maximo: 2mb)</small>
+                </label>
                 <input type="file" id="image" name="image[]" multiple class="form-control">
-
-            <label for="image" class="form-label">Imagem do ocorrido 
-                <small>(Formatos: jpg, jpeg, png - Tamanho maximo: 2mb)</small>
-            </label>
                 <span class="text-danger">{{ $errors->first('image.*') }}</span>
         </div>
 
 <div class="d-flex justify-content-center mt-3">
-    <button type=submit class="btn btn-success btn-success me-2">Atualizar Status</button>
+    <button type=submit class="btn btn-success btn-success me-2">Finalizar chamado</button>
     <a href="{{ route('responsavel.chamados.fila') }}" class="btn btn-secondary ">Voltar</a>
 </div>
     </form>

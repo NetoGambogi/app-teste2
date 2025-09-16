@@ -22,12 +22,14 @@ class ChamadoSeeder extends Seeder
 
         // cria 20 chamados
         for ($i = 1; $i <= 20; $i++) {
+            $status = collect(['aberta', 'em_andamento', 'concluida', 'cancelada'])->random();
+            
             Chamado::create([
                 'requerente_id' => $requerentes ? $requerentes[array_rand($requerentes)] : null,
-                'responsavel_id' => $responsaveis ? $responsaveis[array_rand($responsaveis)] : null,
+                'responsavel_id' => $status === 'aberta' ? null : ($responsaveis ? $responsaveis[array_rand($responsaveis)] : null),
                 'titulo' => "Chamado $i",
                 'descricao' => "Descrição do chamado $i",
-                'status' => collect(['aberta', 'em_andamento', 'concluida', 'cancelada'])->random(),
+                'status' => $status,
                 'data_conclusao' => null,
             ]);
         }

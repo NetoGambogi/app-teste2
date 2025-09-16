@@ -42,7 +42,8 @@ class AuthenticatedSessionController extends Controller
             'requerente' => 'requerente.dashboard',
         ];
 
-        return redirect()->intended(route($redirectMap[$role] ??'home.index'));
+    return redirect()->route($redirectMap[$role]);
+
     }
 
     /**

@@ -3,6 +3,9 @@
 @section('content')
 
     <h1 class="text-center">Chamado detalhado: </h1>
+
+<x-alertas /> <!-- Exibe mensagens de erro/sucesso -->
+
     <div class="d-flex justify-content-center">
         <ul class="list-group">
         <li class="list-group-item"><b>Id: </b> {{$chamado->chamado_id}}</li>
@@ -16,22 +19,7 @@
         </ul>
     </div>
 
-    <div class="d-flex justify-content-center">
-        <div class="images">
-            @if($chamado->imagens->count())
-                <p>Anexos:</p>
-                <div class="d-flex flex-wrap">
-                    @foreach($chamado->imagens as $imagem)
-                        <img src="{{ asset('storage/img/ocorridos/requerente/' . $imagem->nome_img) }}" 
-                            alt="imagem"
-                            style="width: 150px; height: auto; margin-right: 5px;">
-                    @endforeach 
-                </div>     
-            @else 
-                <p>Esse chamado não tem anexos.</p>
-            @endif
-        </div>
-    </div>
+<x-chamado-imagem :chamado="$chamado" /> <!-- Mostrar a imagem do requerente do chamado -->
 
     <div class="d-flex justify-content-center mt-3">
 
@@ -47,8 +35,4 @@
 
     </div>
 
-<x-alertas /> <!-- Exibe mensagens de erro/sucesso -->
-
 @endsection
-</body>
-</html>

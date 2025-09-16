@@ -24,6 +24,22 @@ class UserSeeder extends Seeder
             'ativo' => true,
         ]);
 
+        User::create([
+            'name' => 'Requerente',
+            'email' => 'requerente@requerente',
+            'password' => Hash::make('requerente@requerente'),
+            'role' => 'requerente',
+            'ativo' => true,
+        ]);
+
+        User::create([
+            'name' => 'Responsavel',
+            'email' => 'responsavel@responsavel',
+            'password' => Hash::make('responsavel@responsavel'),
+            'role' => 'responsavel',
+            'ativo' => true,
+        ]);
+
         User::factory()->count(10)->create([
             'role' => 'requerente',
         ]);
