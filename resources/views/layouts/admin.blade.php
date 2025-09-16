@@ -27,19 +27,6 @@
     </div>
   </div>
 </nav>
-<script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
-
-<script>
-    const lightbox = GLightbox({
-        selector: '.glightbox',
-        touchNavigation: true,
-        loop: true,
-        zoomable: true,
-        autoplayVideos: false,
-        width: '90vw',  
-        height: 'auto'  
-    });
-</script>
 
     @yield ('content')
 </body>
